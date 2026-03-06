@@ -75,7 +75,7 @@ export const WhyNaturalFarming: React.FC = () => {
         </div>
 
         {/* Market Demand Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {demands.map((demand, index) => (
             <div
               key={index}
@@ -102,7 +102,7 @@ export const WhyNaturalFarming: React.FC = () => {
             Global Movement Growing Stronger
           </h3>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {globalStats.map((item, index) => (
               <div
                 key={index}
@@ -126,7 +126,7 @@ export const WhyNaturalFarming: React.FC = () => {
         </div>
 
         {/* Three Pillars */}
-        <div className="grid md:grid-cols-3 gap-8 my-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-20">
           <div className="relative">
             <div className="bg-gradient-to-br from-orange-100 to-orange-50 rounded-2xl p-8 border-2 border-orange-200">
               <TrendingUp className="w-12 h-12 text-orange-600 mb-4" />

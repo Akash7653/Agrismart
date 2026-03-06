@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
 
 export const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { currentLanguage = 'en' } = useLanguage();
 
   const testimonials = [
     {
@@ -142,7 +140,7 @@ export const Testimonials: React.FC = () => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid md:grid-cols-4 gap-6 mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
           <div className="text-center p-8 bg-white rounded-xl border-2 border-green-200 hover:border-green-500 transition-all duration-300">
             <p className="text-4xl font-bold text-emerald-700 mb-2">50K+</p>
             <p className="text-gray-700 font-semibold">Happy Farmers</p>

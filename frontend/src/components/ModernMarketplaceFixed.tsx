@@ -239,13 +239,90 @@ const ModernMarketplaceFixed: React.FC = () => {
           price: 159,
           rating: 4.4,
           reviews: 156,
-          image: '/images/products/spray-bottle.svg',
+          image: '/images/products/pesticide-spray.svg',
           description: 'Natural pesticide spray for home garden use',
           inStock: true,
           seller: 'EcoGarden Solutions',
           delivery: '3-4 days',
           features: ['Ready to Use', 'Child Safe', 'Pet Safe', 'Eco-Friendly'],
           certification: 'EPA Registered'
+        },
+        {
+          id: '11',
+          name: 'Smart Watering System',
+          category: 'tools',
+          price: 2499,
+          rating: 4.8,
+          reviews: 342,
+          image: '/images/products/watering-system.svg',
+          description: 'Automated smart watering system with app control',
+          inStock: true,
+          discount: 15,
+          seller: 'SmartFarm Tech',
+          delivery: '5-7 days',
+          features: ['App Controlled', 'Weather Adaptive', 'Water Saving', 'Easy Installation'],
+          certification: 'IoT Certified'
+        },
+        {
+          id: '12',
+          name: 'Premium Farm Equipment Set',
+          category: 'tools',
+          price: 3499,
+          rating: 4.9,
+          reviews: 189,
+          image: '/images/products/farming-equipment.svg',
+          description: 'Complete farm equipment set for modern agriculture',
+          inStock: true,
+          seller: 'ProFarm Equipment',
+          delivery: '7-10 days',
+          features: ['Heavy Duty', 'Rust Proof', 'Multi-Purpose', 'Warranty Included'],
+          certification: 'ISO 9001'
+        },
+        {
+          id: '13',
+          name: 'Plant Growth Booster',
+          category: 'fertilizers',
+          price: 299,
+          rating: 4.6,
+          reviews: 267,
+          image: '/images/products/growth-boost.svg',
+          description: 'Advanced plant growth booster for faster development',
+          inStock: true,
+          discount: 10,
+          seller: 'BioGrow Solutions',
+          delivery: '2-3 days',
+          features: ['Fast Acting', 'Organic Formula', 'Safe for All Plants', 'High Yield'],
+          certification: 'Organic Certified'
+        },
+        {
+          id: '14',
+          name: 'Hybrid Corn Seeds',
+          category: 'seeds',
+          price: 249,
+          rating: 4.7,
+          reviews: 198,
+          image: '/images/products/seeds-pack.svg',
+          description: 'High-yield hybrid corn seeds for commercial farming',
+          inStock: true,
+          seller: 'Hybrid Seeds Pro',
+          delivery: '2-3 days',
+          features: ['High Yield', 'Disease Resistant', 'Drought Tolerant', 'Premium Quality'],
+          certification: 'Quality Tested'
+        },
+        {
+          id: '15',
+          name: 'Organic Compost Mix',
+          category: 'fertilizers',
+          price: 179,
+          rating: 4.5,
+          reviews: 145,
+          image: '/images/products/vermicompost.svg',
+          description: 'Premium organic compost mix enriched with nutrients',
+          inStock: true,
+          seller: 'Nature\'s Best',
+          delivery: '1-2 days',
+          features: ['Nutrient Rich', 'Improves Soil', '100% Organic', 'Fast Acting'],
+          certification: 'USDA Organic'
         }
       ];
       setProducts(dummyProducts);
@@ -612,12 +689,14 @@ const ModernMarketplaceFixed: React.FC = () => {
     const cartProducts = products.filter(product => cartItems[product.id] > 0);
     
     return (
-      <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
-        <div className="flex items-center justify-center min-h-screen p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[80vh] overflow-hidden flex flex-col">
+      <div className="fixed inset-0 z-50 overflow-y-auto">
+        <div className="flex min-h-screen items-end justify-center sm:items-center p-4">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsCartOpen(false)} />
+          
+          <div className="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[80vh] overflow-hidden">
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b dark:border-gray-700">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Shopping Cart</h2>
+            <div className="flex items-center justify-between p-4 border-b dark:border-gray-700">
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white">Shopping Cart</h2>
               <button
                 onClick={() => setIsCartOpen(false)}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
@@ -627,61 +706,57 @@ const ModernMarketplaceFixed: React.FC = () => {
             </div>
             
             {/* Cart Items */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto p-4">
               {cartProducts.length === 0 ? (
-                <div className="text-center py-12">
-                  <ShoppingCart className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Your cart is empty</h3>
-                  <p className="text-gray-600 dark:text-gray-400">Add some products to get started!</p>
+                <div className="text-center py-8">
+                  <ShoppingCart className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-600 dark:text-gray-400">Your cart is empty</p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {cartProducts.map(product => {
                     const quantity = cartItems[product.id];
-                    const subtotal = product.price * quantity;
-                    
                     return (
-                      <div key={product.id} className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                        <img 
-                          src={product.image} 
-                          alt={product.name} 
-                          className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
-                          onError={(e) => {
-                            const img = e.target as HTMLImageElement;
-                            img.src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22%3E%3Crect fill=%22%23f0f0f0%22 width=%2280%22 height=%2280%22/%3E%3Ctext x=%2240%22 y=%2240%22 text-anchor=%22middle%22 dy=%22.3em%22 font-family=%22Arial%22 font-size=%2210%22 fill=%22%23999%22%3EImg%3C/text%3E%3C/svg%3E';
-                          }}
-                        />
-                        
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-gray-900 dark:text-white">{product.name}</h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">₹{product.price} each</p>
+                      <div key={product.id} className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+                        <div className="flex items-center space-x-3">
+                          <img 
+                            src={product.image} 
+                            alt={product.name}
+                            className="w-12 h-12 object-cover rounded-lg"
+                          />
                           
-                          <div className="flex items-center space-x-2 mt-2">
-                            <button
-                              onClick={() => updateCartQuantity(product.id, quantity - 1)}
-                              className="w-8 h-8 bg-gray-100 dark:bg-gray-600 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors dark:text-gray-300"
-                            >
-                              <Minus className="w-4 h-4" />
-                            </button>
-                            <span className="font-semibold text-gray-900 dark:text-white w-8 text-center">{quantity}</span>
-                            <button
-                              onClick={() => updateCartQuantity(product.id, quantity + 1)}
-                              className="w-8 h-8 bg-gray-100 dark:bg-gray-600 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors dark:text-gray-300"
-                            >
-                              <Plus className="w-4 h-4" />
-                            </button>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between mb-1">
+                              <h4 className="font-semibold text-gray-900 dark:text-white text-sm truncate">{product.name}</h4>
+                              <button
+                                onClick={() => updateCartQuantity(product.id, 0)}
+                                className="p-1 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                              >
+                                <X className="w-3 h-3" />
+                              </button>
+                            </div>
                             
-                            <button
-                              onClick={() => updateCartQuantity(product.id, 0)}
-                              className="ml-auto p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-2">
+                                <button
+                                  onClick={() => updateCartQuantity(product.id, quantity - 1)}
+                                  className="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors dark:text-gray-300"
+                                >
+                                  <Minus className="w-3 h-3" />
+                                </button>
+                                <span className="font-semibold text-gray-900 dark:text-white w-6 text-center text-sm">{quantity}</span>
+                                <button
+                                  onClick={() => updateCartQuantity(product.id, quantity + 1)}
+                                  className="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors dark:text-gray-300"
+                                >
+                                  <Plus className="w-3 h-3" />
+                                </button>
+                              </div>
+                              
+                              <span className="font-bold text-green-600 text-sm">₹{product.price * quantity}</span>
+                            </div>
                           </div>
                         </div>
-                        
-                        <div className="text-right">
-                          <p className="font-semibold text-gray-900">₹{subtotal}</p>
                         </div>
                       </div>
                     );

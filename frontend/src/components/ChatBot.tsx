@@ -147,7 +147,7 @@ const ChatBot: React.FC = () => {
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 left-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-110 ${
+        className={`fixed bottom-4 right-4 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-110 ${
           isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
         aria-label="Open chat"
@@ -159,17 +159,14 @@ const ChatBot: React.FC = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 left-6 z-50 w-96 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col">
+        <div className="fixed bottom-4 right-4 z-50 w-80 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col">
           {/* Header */}
-          <div className="bg-green-500 text-white p-4 rounded-t-2xl flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="bg-white bg-opacity-20 p-2 rounded-full">
-                <Bot className="w-5 h-5" />
+          <div className="bg-green-500 text-white p-2 rounded-t-2xl flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <div className="bg-white bg-opacity-20 p-1 rounded-full">
+                <Bot className="w-3 h-3" />
               </div>
-              <div>
-                <div className="font-semibold">{t('chatbotName')}</div>
-                <div className="text-xs opacity-90">{t('chatbotTagline')}</div>
-              </div>
+              <h3 className="text-sm font-medium">AgriSmart Assistant</h3>
             </div>
             <button
               onClick={() => setIsOpen(false)}
@@ -177,31 +174,31 @@ const ChatBot: React.FC = () => {
               aria-label="Close chat"
               title="Close chat"
             >
-              <X className="w-4 h-4" />
+              <X className="w-3 h-3" />
             </button>
           </div>
 
           {/* Messages */}
-          <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-2 space-y-2">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`flex items-start space-x-2 max-w-[80%] ${
+                <div className={`flex items-start space-x-2 max-w-[85%] ${
                   message.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''
                 }`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                     message.sender === 'user' ? 'bg-blue-500' : 'bg-green-500'
                   }`}>
                     {message.sender === 'user' ? (
-                      <User className="w-4 h-4 text-white" />
+                      <User className="w-3 h-3 text-white" />
                     ) : (
-                      <Bot className="w-4 h-4 text-white" />
+                      <Bot className="w-3 h-3 text-white" />
                     )}
                   </div>
                   <div>
-                    <div className={`p-3 rounded-2xl ${
+                    <div className={`p-2 rounded-lg text-sm ${
                       message.sender === 'user'
                         ? 'bg-blue-500 text-white rounded-br-sm'
                         : 'bg-gray-100 text-gray-900 rounded-bl-sm'
@@ -219,14 +216,14 @@ const ChatBot: React.FC = () => {
             {isTyping && (
               <div className="flex justify-start">
                 <div className="flex items-start space-x-2">
-                  <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
-                    <Bot className="w-4 h-4 text-white" />
+                  <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
+                    <Bot className="w-3 h-3 text-white" />
                   </div>
-                  <div className="bg-gray-100 p-3 rounded-2xl rounded-bl-sm">
+                  <div className="bg-gray-100 p-2 rounded-lg rounded-bl-sm">
                     <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                     </div>
                   </div>
                 </div>
@@ -237,7 +234,7 @@ const ChatBot: React.FC = () => {
 
           {/* Quick Replies */}
           {messages.length === 1 && (
-            <div className="px-4 pb-2">
+            <div className="px-3 pb-2">
               <div className="text-xs text-gray-500 mb-2">{t('quickTopics')}</div>
               <div className="flex flex-wrap gap-1">
                 {quickReplies.map((reply) => (
@@ -254,14 +251,14 @@ const ChatBot: React.FC = () => {
           )}
 
           {/* Input */}
-          <div className="p-4 border-t border-gray-200">
+          <div className="p-3 border-t border-gray-200">
             <div className="flex items-end space-x-2">
               <textarea
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder={t('askPlaceholder')}
-                className="flex-1 p-2 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                className="flex-1 p-2 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm"
                 rows={1}
                 style={{ minHeight: '40px', maxHeight: '80px' }}
               />
@@ -272,7 +269,7 @@ const ChatBot: React.FC = () => {
                 aria-label="Send message"
                 title="Send message"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-3 h-3" />
               </button>
             </div>
           </div>

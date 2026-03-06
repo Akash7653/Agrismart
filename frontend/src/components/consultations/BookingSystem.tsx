@@ -208,7 +208,7 @@ const BookingSystem: React.FC<{
     <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">Select Consultation Type</h3>
       
-      <div className="grid gap-4">
+      <div className="grid grid-cols-1 gap-3">
         {consultationTypes.map(type => {
           const Icon = type.icon;
           const isSelected = consultationType === type.id;
@@ -218,17 +218,17 @@ const BookingSystem: React.FC<{
             <div
               key={type.id}
               onClick={() => setConsultationType(type.id as any)}
-              className={`border rounded-xl p-4 cursor-pointer transition-all ${
+              className={`border rounded-lg p-3 cursor-pointer transition-all ${
                 isSelected
                   ? 'border-green-500 bg-green-50'
                   : 'border-gray-200 hover:border-gray-300'
               }`}
             >
               <div className="flex items-center space-x-4">
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                   isSelected ? 'bg-green-100' : 'bg-gray-100'
                 }`}>
-                  <Icon className={`w-6 h-6 ${isSelected ? 'text-green-600' : 'text-gray-600'}`} />
+                  <Icon className={`w-5 h-5 ${isSelected ? 'text-green-600' : 'text-gray-600'}`} />
                 </div>
                 
                 <div className="flex-1">
@@ -241,8 +241,8 @@ const BookingSystem: React.FC<{
                 </div>
                 
                 {isSelected && (
-                  <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
-                    <Check className="w-4 h-4 text-white" />
+                  <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
+                    <Check className="w-3 h-3 text-white" />
                   </div>
                 )}
               </div>
@@ -257,10 +257,10 @@ const BookingSystem: React.FC<{
     <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">Select Date & Time</h3>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Select Date</label>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {getAvailableDates().map(date => (
               <button
                 key={date}
@@ -283,7 +283,7 @@ const BookingSystem: React.FC<{
         
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Select Time</label>
-          <div className="grid grid-cols-3 gap-2 max-h-48 overflow-y-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-48 overflow-y-auto">
             {selectedDate && getAvailableTimesForDate(selectedDate).map(slot => (
               <button
                 key={`${slot.date}-${slot.time}`}
@@ -301,7 +301,7 @@ const BookingSystem: React.FC<{
         </div>
       </div>
       
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
         <div className="flex items-start space-x-3">
           <Globe className="w-5 h-5 text-blue-600 mt-0.5" />
           <div>
@@ -319,7 +319,7 @@ const BookingSystem: React.FC<{
     <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">Payment Details</h3>
       
-      <div className="bg-gray-50 rounded-xl p-6 space-y-4">
+      <div className="bg-gray-50 rounded-lg p-4 space-y-3">
         <div className="flex justify-between items-center">
           <span className="text-gray-600">Consultation Fee</span>
           <span className="font-semibold">${calculatePrice()}</span>
@@ -338,14 +338,14 @@ const BookingSystem: React.FC<{
       
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">Payment Method</label>
-        <div className="grid gap-3">
+        <div className="grid grid-cols-1 gap-2">
           {paymentMethods.map(method => {
             const Icon = method.icon;
             return (
               <div
                 key={method.id}
                 onClick={() => setPaymentMethod(method.id as any)}
-                className={`border rounded-lg p-3 cursor-pointer transition-all ${
+                className={`border rounded-md p-2 cursor-pointer transition-all ${
                   paymentMethod === method.id
                     ? 'border-green-500 bg-green-50'
                     : 'border-gray-200 hover:border-gray-300'
@@ -383,11 +383,11 @@ const BookingSystem: React.FC<{
     <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">Confirm Booking</h3>
       
-      <div className="bg-green-50 border border-green-200 rounded-xl p-6">
+      <div className="bg-green-50 border border-green-200 rounded-lg p-4">
         <div className="space-y-4">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-              <Users className="w-6 h-6 text-green-600" />
+            <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+              <Users className="w-5 h-5 text-green-600" />
             </div>
             <div>
               <h4 className="font-semibold text-gray-900">{scientist.fullName}</h4>
@@ -430,7 +430,7 @@ const BookingSystem: React.FC<{
         </div>
       </div>
       
-      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
         <div className="flex items-start space-x-3">
           <AlertCircle className="w-5 h-5 text-yellow-600 mt-0.5" />
           <div>
@@ -459,11 +459,11 @@ const BookingSystem: React.FC<{
       <div className="flex min-h-screen items-center justify-center p-4">
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
         
-        <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl">
+        <div className="relative w-full max-w-lg bg-white rounded-xl shadow-xl">
           {/* Header */}
-          <div className="border-b px-6 py-4">
+          <div className="border-b px-4 py-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-gray-900">Book Consultation</h2>
+              <h2 className="text-lg font-semibold text-gray-900">Book Consultation</h2>
               <button
                 onClick={onClose}
                 className="text-gray-400 hover:text-gray-600 transition-colors"

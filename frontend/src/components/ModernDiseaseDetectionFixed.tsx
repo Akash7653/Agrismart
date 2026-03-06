@@ -262,7 +262,7 @@ const ModernDiseaseDetectionFixed: React.FC = () => {
 
   const renderUploadArea = () => (
     <div className="space-y-6">
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border-2 border-dashed border-gray-300 dark:border-gray-700 p-8 text-center hover:shadow-2xl hover:border-red-400 transition-all duration-300 transform hover:scale-105 group animate-slideUp">
           <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 dark:from-red-900/30 dark:to-red-800/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
             <Upload className="w-7 h-7 text-red-600 dark:text-red-400" />

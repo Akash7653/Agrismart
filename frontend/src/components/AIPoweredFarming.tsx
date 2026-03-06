@@ -68,7 +68,7 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
@@ -109,7 +109,7 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
                   {/* Feature List */}
                   <div className="pt-6 border-t border-gray-700">
                     <p className="text-xs font-semibold text-gray-500 mb-3 uppercase">Key Features</p>
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {feature.features.map((feat, i) => (
                         <div key={i} className="text-xs text-gray-400 bg-gray-800/50 px-3 py-2 rounded-lg">
                           #{feat}
@@ -136,7 +136,7 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
         <div className="bg-gradient-to-r from-emerald-950 to-green-950 rounded-2xl p-12 border border-emerald-800/50">
           <h3 className="text-3xl font-bold text-white mb-12 text-center">How It Works Together</h3>
 
-          <div className="grid md:grid-cols-4 gap-6 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
             {/* Step 1 */}
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center text-2xl font-bold text-white">
@@ -175,7 +175,7 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
         </div>
 
         {/* Tech Stack */}
-        <div className="mt-20 grid md:grid-cols-4 gap-6 text-center">
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div>
             <p className="text-emerald-400 font-bold text-lg mb-2">Deep Learning</p>
             <p className="text-gray-400 text-sm">Computer vision for plant health</p>
