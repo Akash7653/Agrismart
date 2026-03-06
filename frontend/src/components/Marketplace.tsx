@@ -197,7 +197,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ currentLanguage }) => {
       let checkoutResult;
       
       try {
-        const res = await fetch('/api/create-checkout-session', {
+        const res = await fetch('https://agrismart-7zyv.onrender.com/api/create-checkout-session', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ items })

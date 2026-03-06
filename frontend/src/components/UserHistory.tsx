@@ -155,7 +155,7 @@ const UserHistory: React.FC = () => {
         if (id) {
           // Fetch user history from backend
           try {
-            const response = await fetch(`http://localhost:4000/api/user/history/${id}`, {
+            const response = await fetch(`https://agrismart-7zyv.onrender.com/api/user/history/${id}`, {
               headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'Content-Type': 'application/json'
@@ -248,7 +248,7 @@ const UserHistory: React.FC = () => {
     try {
       setLoading(true);
       const authToken = localStorage.getItem('authToken');
-      const response = await fetch(`http://localhost:4000/api/user/history/${userId}`, {
+      const response = await fetch(`https://agrismart-7zyv.onrender.com/api/user/history/${userId}`, {
         headers: {
           'Authorization': `Bearer ${authToken}`,
           'Content-Type': 'application/json'

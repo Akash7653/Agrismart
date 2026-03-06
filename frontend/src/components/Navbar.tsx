@@ -148,7 +148,7 @@ const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Mobile Navigation */}
-      {isMenuOpen && currentUser && (
+      {isMenuOpen && (
         <div className={`md:hidden fixed left-0 right-0 top-16 z-40 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 overflow-y-auto max-h-[calc(100vh-4rem)]`}>
           <div className="px-3 py-3 space-y-1">
             {navItems.map((item, index) => (
@@ -170,8 +170,39 @@ const Navbar: React.FC<NavbarProps> = ({
               </div>
             ))}
             
+            {/* Mobile Language Selector */}
+            <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-800">
+              <div className="relative" ref={languageRef}>
+                <button 
+                  className={`flex items-center justify-between w-full px-4 py-3 text-base border-2 rounded-lg font-bold transition-all duration-300 ${colors.border.primary} ${colors.bg.secondary} ${colors.text.primary} hover:border-green-500 dark:hover:border-green-400 hover:shadow-lg`}
+                  onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+                >
+                  <div className="flex items-center gap-2">
+                    <Globe className="w-5 h-5" />
+                    <span className="font-semibold">{languages.find(l => l.code === currentLanguage)?.name || 'Language'}</span>
+                  </div>
+                  <ChevronDown className={`w-5 h-5 transition-transform ${isLanguageOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {isLanguageOpen && (
+                  <div className={`absolute left-0 top-full mt-2 ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'} border-2 border-green-500 rounded-lg shadow-2xl z-50 w-full py-0.5 overflow-hidden`}>
+                    {languages.map((lang, index) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => handleLanguageChange(lang.code)}
+                        className={`w-full px-2.5 py-1.5 text-xs font-medium text-left hover:bg-green-50 dark:hover:bg-green-900/30 transition-all ${
+                          currentLanguage === lang.code ? 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300' : ''
+                        } ${index < languages.length - 1 ? (isDark ? 'border-b border-gray-700' : 'border-b border-gray-200') : ''}`}
+                      >
+                        {lang.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+            
             {/* Mobile Auth */}
-            <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-800 mt-4">
+            <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-800">
               {currentUser ? (
                 <div className="space-y-3">
                   <div className="flex items-center gap-3 p-4 bg-green-50 dark:bg-green-900/30 rounded-lg">
@@ -180,7 +211,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   </div>
                   <button
                     onClick={() => {
-                      onSignOut();
+                      onSignOut?.();
                       setIsMenuOpen(false);
                     }}
                     className="w-full flex items-center justify-center gap-2 text-white bg-red-500 hover:bg-red-600 text-base font-bold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md"

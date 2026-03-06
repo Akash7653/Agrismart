@@ -66,7 +66,7 @@ const ModernMarketplaceFixed: React.FC = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/marketplace/products?limit=50');
+      const response = await fetch('https://agrismart-7zyv.onrender.com/api/marketplace/products?limit=50');
       const data = await response.json();
       
       if (data.success) {
@@ -107,7 +107,7 @@ const ModernMarketplaceFixed: React.FC = () => {
     
     try {
       // Create order on backend
-      const response = await fetch('/api/payments/create-order', {
+      const response = await fetch('https://agrismart-7zyv.onrender.com/api/payments/create-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ const ModernMarketplaceFixed: React.FC = () => {
           order_id: orderData.data.order_id,
           handler: async function (response: any) {
             // Verify payment on backend
-            const verifyResponse = await fetch('/api/payments/verify', {
+            const verifyResponse = await fetch('https://agrismart-7zyv.onrender.com/api/payments/verify', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

@@ -76,7 +76,7 @@ const ModernConsultationsReal: React.FC = () => {
   const fetchExperts = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/consultations/experts');
+      const response = await fetch('https://agrismart-7zyv.onrender.com/api/consultations/experts');
       const data = await response.json();
       
       if (data.success) {
@@ -91,7 +91,7 @@ const ModernConsultationsReal: React.FC = () => {
 
   const fetchConsultationTypes = async () => {
     try {
-      const response = await fetch('/api/consultations/consultation-types');
+      const response = await fetch('https://agrismart-7zyv.onrender.com/api/consultations/consultation-types');
       const data = await response.json();
       
       if (data.success) {
@@ -195,7 +195,7 @@ const ModernConsultationsReal: React.FC = () => {
       setMessageInput('');
       
       // Send to backend
-      const response = await fetch('/api/consultations/chat/send', {
+      const response = await fetch('https://agrismart-7zyv.onrender.com/api/consultations/chat/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -261,7 +261,7 @@ const ModernConsultationsReal: React.FC = () => {
     try {
       const consultationType = consultationTypes.find(ct => ct.name === type);
       
-      const response = await fetch('/api/consultations/book', {
+      const response = await fetch('https://agrismart-7zyv.onrender.com/api/consultations/book', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

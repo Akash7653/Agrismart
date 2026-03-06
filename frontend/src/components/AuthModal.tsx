@@ -67,7 +67,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuth }) => {
     setError(null);
 
     try {
-      const endpoint = isLogin ? '/api/users/login' : '/api/users/register';
+      const endpoint = isLogin ? 'https://agrismart-7zyv.onrender.com/api/users/login' : 'https://agrismart-7zyv.onrender.com/api/users/register';
       const body = isLogin 
         ? { email: formData.email, password: formData.password }
         : {
@@ -87,7 +87,20 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuth }) => {
         body: JSON.stringify(body),
       });
 
-      const result = await response.json();
+      // Debug: Log response details
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+      
+      const responseText = await response.text();
+      console.log('Response text:', responseText);
+      
+      let result;
+      try {
+        result = JSON.parse(responseText);
+      } catch (e) {
+        console.error('Failed to parse JSON:', e);
+        throw new Error(`Server returned non-JSON response: ${responseText.substring(0, 100)}...`);
+      }
 
       if (!response.ok) {
         throw new Error(result.message || 'Authentication failed');

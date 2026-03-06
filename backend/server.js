@@ -44,7 +44,7 @@ const httpServer = http.createServer(app);
 // Initialize Socket.io
 export const io = new Server(httpServer, {
   cors: {
-    origin: ['http://localhost:5173', 'http://localhost:5174', 'http://127.0.0.1:5173', 'http://127.0.0.1:5174'],
+    origin: ['http://localhost:5173', 'http://localhost:5174', 'http://127.0.0.1:5173', 'http://127.0.0.1:5174', 'https://agrismart-mu.vercel.app'],
     credentials: true,
     methods: ['GET', 'POST']
   },
@@ -90,7 +90,7 @@ io.on('connection', (socket) => {
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://127.0.0.1:5173', 'http://127.0.0.1:5174'],
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://127.0.0.1:5173', 'http://127.0.0.1:5174', 'https://agrismart-mu.vercel.app'],
   credentials: true
 }));
 
@@ -141,6 +141,28 @@ app.get('/api/health', (req, res) => {
     status: 'OK',
     timestamp: new Date().toISOString(),
     service: 'AgriSmart Backend API'
+  });
+});
+
+// Debug endpoint
+app.get('/api/debug', (req, res) => {
+  res.json({
+    message: 'Debug endpoint working',
+    routes: [
+      '/api/users/register',
+      '/api/users/login',
+      '/api/health',
+      '/api/debug'
+    ],
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Direct users test
+app.get('/api/users/test', (req, res) => {
+  res.json({
+    message: 'Users route is working',
+    timestamp: new Date().toISOString()
   });
 });
 

@@ -10,10 +10,17 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:4000',
+        target: 'https://agrismart-7zyv.onrender.com',
         changeOrigin: true,
-        secure: false,
+        secure: true,
       },
     },
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
+  },
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
   },
 });
