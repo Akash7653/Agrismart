@@ -85,8 +85,8 @@ function App() {
               ) : (
                 <LandingPage 
                   onGetStarted={() => setShowAuthModal(true)}
-                  onLearnHowAI={() => window.location.pathname = '/learn-how-ai'}
-                  onJoinMovement={() => window.location.pathname = '/join-the-movement'}
+                  onLearnHowAI={() => setActiveSection('learn-how-ai')}
+                  onJoinMovement={() => setActiveSection('join-movement')}
                 />
               )}
             </>
@@ -109,7 +109,11 @@ function App() {
                     {activeSection === 'farmResources' && <FarmResources />}
                     {activeSection === 'history' && <UserHistory />}
                     {activeSection === 'analytics' && <ModernAnalytics />}
-                    {activeSection === 'dashboard' && (
+                    {activeSection === 'learn-how-ai' ? (
+                      <LearnHowAI />
+                    ) : activeSection === 'join-movement' ? (
+                      <JoinTheMovement />
+                    ) : activeSection === 'dashboard' ? (
                       <>
                         <Hero currentUser={currentUser} onGetStarted={() => setShowAuthModal(true)} />
                         <ModernCropPrediction />
@@ -121,7 +125,7 @@ function App() {
                         <ModernAnalytics />
                         <Footer />
                       </>
-                    )}
+                    ) : null}
                   </div>
                 </main>
               </div>

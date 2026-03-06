@@ -100,15 +100,15 @@ const NotificationCenter: React.FC<NotificationCenterProps> = () => {
       {/* Notification Bell Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`relative p-2 rounded-lg transition-all duration-200 transform hover:scale-110 ${
+        className={`relative p-2 sm:p-3 rounded-lg transition-all duration-200 transform hover:scale-110 ${
           isDark
             ? 'text-gray-400 hover:text-green-400 hover:bg-gray-800'
             : 'text-gray-600 hover:text-green-600 hover:bg-green-50'
         }`}
       >
-        <Bell className="w-6 h-6" />
+        <Bell className="w-5 h-5 sm:w-6 sm:h-6" />
         {unreadCount > 0 && (
-          <span className={`absolute top-1 right-1 w-5 h-5 rounded-full text-xs font-bold text-white flex items-center justify-center ${
+          <span className={`absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full text-xs font-bold text-white flex items-center justify-center ${
             unreadCount > 9 ? 'bg-red-500 text-xs px-1' : 'bg-red-500'
           }`}>
             {unreadCount > 9 ? '9+' : unreadCount}
@@ -118,7 +118,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = () => {
 
       {/* Notification Panel */}
       {isOpen && (
-        <div className={`absolute right-0 top-14 w-96 rounded-2xl shadow-2xl z-50 overflow-hidden border transition-all duration-300 ${
+        <div className={`absolute right-0 top-14 w-80 sm:w-96 rounded-2xl shadow-2xl z-50 overflow-hidden border transition-all duration-300 ${
           isDark
             ? 'bg-gray-800 border-gray-700'
             : 'bg-white border-gray-200'
