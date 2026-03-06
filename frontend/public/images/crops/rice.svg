@@ -1,0 +1,11 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f3f4f6"/>
+  <rect x="50" y="150" width="200" height="30" fill="#1e3a8a"/>
+  <path d="M 100 150 L 100 80 L 95 70 L 100 60 L 105 70 L 100 80" fill="#fbbf24"/>
+  <path d="M 150 150 L 150 70 L 145 60 L 150 50 L 155 60 L 150 70" fill="#fbbf24"/>
+  <path d="M 200 150 L 200 80 L 195 70 L 200 60 L 205 70 L 200 80" fill="#fbbf24"/>
+  <rect x="90" y="140" width="20" height="10" fill="#60a5fa"/>
+  <rect x="140" y="130" width="20" height="10" fill="#60a5fa"/>
+  <rect x="190" y="140" width="20" height="10" fill="#60a5fa"/>
+  <text x="150" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">Rice Crop</text>
+</svg>

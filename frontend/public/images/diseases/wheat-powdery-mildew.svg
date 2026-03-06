@@ -1,0 +1,12 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f3f4f6"/>
+  <ellipse cx="150" cy="100" rx="80" ry="50" fill="#fef3c7"/>
+  <ellipse cx="150" cy="100" rx="60" ry="35" fill="#fde68a"/>
+  <ellipse cx="150" cy="100" rx="40" ry="20" fill="#fcd34d"/>
+  <circle cx="120" cy="90" r="5" fill="#fef3c7"/>
+  <circle cx="180" cy="90" r="5" fill="#fef3c7"/>
+  <circle cx="150" cy="110" r="5" fill="#fef3c7"/>
+  <circle cx="130" cy="100" r="5" fill="#fef3c7"/>
+  <circle cx="170" cy="100" r="5" fill="#fef3c7"/>
+  <text x="150" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">Wheat Powdery Mildew</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f3f4f6"/>
+  <ellipse cx="150" cy="100" rx="80" ry="50" fill="#dcfce7"/>
+  <ellipse cx="150" cy="100" rx="60" ry="35" fill="#bbf7d0"/>
+  <ellipse cx="150" cy="100" rx="40" ry="20" fill="#86efac"/>
+  <circle cx="120" cy="90" r="8" fill="#fbbf24"/>
+  <circle cx="180" cy="90" r="8" fill="#fbbf24"/>
+  <circle cx="150" cy="110" r="8" fill="#fbbf24"/>
+  <text x="150" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">Tomato Leaf Blight</text>
+</svg>

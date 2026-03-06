@@ -1,0 +1,9 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f3f4f6"/>
+  <rect x="50" y="50" width="200" height="100" fill="#e0e7ff" stroke="#6366f1" stroke-width="2" rx="10"/>
+  <text x="150" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#312e81">Drip Irrigation Kit</text>
+  <text x="150" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#4338ca">Complete Set</text>
+  <path d="M 65 85 L 85 85 L 85 115 L 65 115 Z" fill="#818cf8"/>
+  <path d="M 215 85 L 235 85 L 235 115 L 215 115 Z" fill="#818cf8"/>
+  <line x1="85" y1="100" x2="215" y2="100" stroke="#6366f1" stroke-width="2"/>
+</svg>

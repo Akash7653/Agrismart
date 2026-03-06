@@ -1,0 +1,8 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f3f4f6"/>
+  <rect x="50" y="50" width="200" height="100" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="10"/>
+  <text x="150" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#1e3a8a">Neem Oil Bio-Pesticide</text>
+  <text x="150" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#1e40af">500ml Bottle</text>
+  <rect x="65" y="85" width="20" height="30" fill="#60a5fa" rx="5"/>
+  <rect x="215" y="85" width="20" height="30" fill="#60a5fa" rx="5"/>
+</svg>

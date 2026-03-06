@@ -1,0 +1,8 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f3f4f6"/>
+  <rect x="50" y="50" width="200" height="100" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="10"/>
+  <text x="150" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#166534">Vermicompost</text>
+  <text x="150" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#15803d">Premium Grade</text>
+  <ellipse cx="75" cy="100" rx="20" ry="15" fill="#4ade80"/>
+  <ellipse cx="225" cy="100" rx="20" ry="15" fill="#4ade80"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f3f4f6"/>
+  <rect x="50" y="150" width="200" height="30" fill="#92400e"/>
+  <path d="M 100 150 L 100 100 L 95 90 L 100 80 L 105 90 L 100 100" fill="#fbbf24"/>
+  <path d="M 150 150 L 150 90 L 145 80 L 150 70 L 155 80 L 150 90" fill="#fbbf24"/>
+  <path d="M 200 150 L 200 100 L 195 90 L 200 80 L 205 90 L 200 100" fill="#fbbf24"/>
+  <text x="150" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">Wheat Crop</text>
+</svg>
