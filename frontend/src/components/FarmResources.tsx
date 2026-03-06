@@ -52,7 +52,7 @@ const FarmResources: React.FC = () => {
       description: 'Comprehensive guide covering all aspects of organic farming from soil preparation to harvest.',
       type: 'guide',
       category: 'guides',
-      imageUrl: '/images/resources/organic-farming-guide.jpg',
+      imageUrl: '/images/products/vermicompost.svg',
       downloadUrl: '/downloads/organic-farming-guide.pdf',
       tags: ['organic', 'beginner', 'comprehensive'],
       featured: true,
@@ -64,7 +64,7 @@ const FarmResources: React.FC = () => {
       description: 'Learn effective natural pest control techniques without using harmful chemicals.',
       type: 'guide',
       category: 'guides',
-      imageUrl: '/images/resources/pest-control-guide.jpg',
+      imageUrl: '/images/products/neem-oil.svg',
       downloadUrl: '/downloads/natural-pest-control.pdf',
       tags: ['pest-control', 'natural', 'chemical-free'],
       rating: 4.6
@@ -75,7 +75,7 @@ const FarmResources: React.FC = () => {
       description: 'Step-by-step video tutorial on how to start composting at your farm.',
       type: 'video',
       category: 'videos',
-      imageUrl: '/images/resources/composting-video.jpg',
+      imageUrl: '/images/products/vermicompost.svg',
       externalUrl: 'https://youtube.com/watch?v=example',
       duration: '25:30',
       tags: ['composting', 'video', 'beginner'],
@@ -88,7 +88,7 @@ const FarmResources: React.FC = () => {
       description: 'Free online tool to analyze your soil health and get recommendations.',
       type: 'tool',
       category: 'tools',
-      imageUrl: '/images/resources/soil-testing-tool.jpg',
+      imageUrl: '/images/products/drip-irrigation.svg',
       externalUrl: '/tools/soil-tester',
       tags: ['soil', 'testing', 'free', 'tool'],
       rating: 4.7
@@ -100,7 +100,7 @@ const FarmResources: React.FC = () => {
       type: 'event',
       category: 'events',
       date: '2024-03-15',
-      imageUrl: '/images/resources/workshop.jpg',
+      imageUrl: '/images/products/organic-wheat-seeds.svg',
       attendees: 45,
       tags: ['workshop', 'in-person', 'advanced'],
       featured: true,
@@ -112,7 +112,7 @@ const FarmResources: React.FC = () => {
       description: 'Downloadable Excel template for planning your crop rotation schedule.',
       type: 'tool',
       category: 'tools',
-      imageUrl: '/images/resources/crop-rotation-template.jpg',
+      imageUrl: '/images/products/tomato-seeds.svg',
       downloadUrl: '/downloads/crop-rotation-template.xlsx',
       tags: ['crop-rotation', 'planning', 'template', 'excel'],
       rating: 4.5
@@ -123,7 +123,7 @@ const FarmResources: React.FC = () => {
       description: 'Calculate the right amount of natural fertilizers for your crops.',
       type: 'tool',
       category: 'tools',
-      imageUrl: '/images/resources/fertilizer-calculator.jpg',
+      imageUrl: '/images/products/bio-fungicide.svg',
       externalUrl: '/tools/fertilizer-calculator',
       tags: ['fertilizer', 'calculator', 'natural'],
       rating: 4.8
@@ -134,10 +134,57 @@ const FarmResources: React.FC = () => {
       description: 'Complete guide to installing and maintaining drip irrigation systems.',
       type: 'guide',
       category: 'guides',
-      imageUrl: '/images/resources/drip-irrigation-guide.jpg',
+      imageUrl: '/images/products/drip-irrigation.svg',
       downloadUrl: '/downloads/drip-irrigation-guide.pdf',
       tags: ['irrigation', 'installation', 'water-saving'],
       rating: 4.6
+    },
+    {
+      id: '9',
+      title: 'Greenhouse Farming Basics',
+      description: 'Essential guide for setting up and managing a greenhouse for year-round farming.',
+      type: 'guide',
+      category: 'guides',
+      imageUrl: '/images/products/tomato-seeds.svg',
+      downloadUrl: '/downloads/greenhouse-farming.pdf',
+      tags: ['greenhouse', 'year-round', 'infrastructure'],
+      featured: true,
+      rating: 4.7
+    },
+    {
+      id: '10',
+      title: 'Hydroponic Growing Systems',
+      description: 'Introduction to soil-less farming techniques and hydroponic systems.',
+      type: 'video',
+      category: 'videos',
+      imageUrl: '/images/products/drip-irrigation.svg',
+      externalUrl: 'https://youtube.com/watch?v=hydroponics',
+      duration: '45:00',
+      tags: ['hydroponics', 'soil-less', 'modern'],
+      rating: 4.8
+    },
+    {
+      id: '11',
+      title: 'Seed Starting Calculator',
+      description: 'Calculate optimal seed starting times based on your climate and growing season.',
+      type: 'tool',
+      category: 'tools',
+      imageUrl: '/images/products/organic-wheat-seeds.svg',
+      externalUrl: '/tools/seed-calculator',
+      tags: ['seeds', 'planning', 'calculator'],
+      rating: 4.6
+    },
+    {
+      id: '12',
+      title: 'Sustainable Farming Conference',
+      description: 'Annual conference bringing together sustainable farming experts and practitioners.',
+      type: 'event',
+      category: 'events',
+      date: '2024-04-20',
+      imageUrl: '/images/products/vermicompost.svg',
+      attendees: 120,
+      tags: ['conference', 'networking', 'sustainable'],
+      rating: 4.9
     }
   ];
 

@@ -907,7 +907,7 @@ const ModernConsultationsReal: React.FC = () => {
         </div>
 
         {/* Experts Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {loading ? (
             <div className="col-span-2 text-center py-12">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">

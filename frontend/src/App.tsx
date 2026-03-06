@@ -98,29 +98,31 @@ function App() {
                 onSignOut={handleSignOut}
                 onNavigate={handleSectionNavigate}
               />
-              <div className="flex">
+              <div className="flex flex-col lg:flex-row">
                 <SideNav onNavigate={handleSectionNavigate} />
-                <main className="flex-1 min-h-screen bg-white dark:bg-gray-950">
-                  {activeSection === 'prediction' && <ModernCropPrediction />}
-                  {activeSection === 'disease' && <ModernDiseaseDetectionFixed />}
-                  {activeSection === 'consultations' && <ModernConsultationsReal />}
-                  {activeSection === 'marketplace' && <ModernMarketplaceFixed />}
-                  {activeSection === 'farmResources' && <FarmResources />}
-                  {activeSection === 'history' && <UserHistory />}
-                  {activeSection === 'analytics' && <ModernAnalytics />}
-                  {activeSection === 'dashboard' && (
-                    <>
-                      <Hero currentUser={currentUser} onGetStarted={() => setShowAuthModal(true)} />
-                      <ModernCropPrediction />
-                      <ModernDiseaseDetectionFixed />
-                      <ModernConsultationsReal />
-                      <ModernMarketplaceFixed />
-                      <FarmResources />
-                      <UserHistory />
-                      <ModernAnalytics />
-                      <Footer />
-                    </>
-                  )}
+                <main className="flex-1 min-h-screen bg-white dark:bg-gray-950 w-full lg:w-auto">
+                  <div className="px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+                    {activeSection === 'prediction' && <ModernCropPrediction />}
+                    {activeSection === 'disease' && <ModernDiseaseDetectionFixed />}
+                    {activeSection === 'consultations' && <ModernConsultationsReal />}
+                    {activeSection === 'marketplace' && <ModernMarketplaceFixed />}
+                    {activeSection === 'farmResources' && <FarmResources />}
+                    {activeSection === 'history' && <UserHistory />}
+                    {activeSection === 'analytics' && <ModernAnalytics />}
+                    {activeSection === 'dashboard' && (
+                      <>
+                        <Hero currentUser={currentUser} onGetStarted={() => setShowAuthModal(true)} />
+                        <ModernCropPrediction />
+                        <ModernDiseaseDetectionFixed />
+                        <ModernConsultationsReal />
+                        <ModernMarketplaceFixed />
+                        <FarmResources />
+                        <UserHistory />
+                        <ModernAnalytics />
+                        <Footer />
+                      </>
+                    )}
+                  </div>
                 </main>
               </div>
               <ChatBot />

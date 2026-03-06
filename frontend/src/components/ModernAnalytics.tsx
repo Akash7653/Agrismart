@@ -372,12 +372,12 @@ const ModernAnalytics: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Metrics Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {metrics.map(metric => renderMetricCard(metric))}
         </div>
 
         {/* Charts and Analytics */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           <div className="lg:col-span-2">
             {renderRevenueChart()}
           </div>
@@ -386,7 +386,7 @@ const ModernAnalytics: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {renderCropChart()}
           {renderRecentActivities()}
         </div>
@@ -396,7 +396,7 @@ const ModernAnalytics: React.FC = () => {
           isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white'
         }`}>
           <h3 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>Quick Insights</h3>
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className={`p-6 rounded-xl text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ${
               isDark
                 ? 'bg-green-900/30 border border-green-700'

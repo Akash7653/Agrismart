@@ -266,7 +266,7 @@ const ModernCropPrediction: React.FC = () => {
             <Leaf className="w-4 h-4 mr-2 text-blue-600" />
             Soil Type
           </label>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {soilTypes.map(soil => (
               <button
                 key={soil.id}
@@ -291,7 +291,7 @@ const ModernCropPrediction: React.FC = () => {
             <Cloud className="w-4 h-4 mr-2 text-blue-600" />
             Climate Type
           </label>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {climateTypes.map(climate => (
               <button
                 key={climate.id}
@@ -433,7 +433,7 @@ const ModernCropPrediction: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-3 text-center hover:shadow-md transition-all duration-300 transform hover:scale-105 cursor-pointer">
                   <BarChart3 className="w-5 h-5 text-blue-600 dark:text-blue-400 mx-auto mb-1" />
                   <div className="font-bold text-blue-600 dark:text-blue-400 text-sm">{crop.expectedYield}</div>

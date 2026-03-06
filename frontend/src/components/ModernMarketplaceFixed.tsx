@@ -89,6 +89,166 @@ const ModernMarketplaceFixed: React.FC = () => {
       }
     } catch (error) {
       console.error('Error fetching products:', error);
+      // Fallback to dummy products
+      const dummyProducts: Product[] = [
+        {
+          id: '1',
+          name: 'Organic Wheat Seeds',
+          category: 'seeds',
+          price: 299,
+          rating: 4.5,
+          reviews: 128,
+          image: '/images/products/organic-wheat-seeds.svg',
+          description: 'High-quality organic wheat seeds perfect for sustainable farming',
+          inStock: true,
+          discount: 10,
+          seller: 'AgriSmart Seeds',
+          delivery: '2-3 days',
+          features: ['Non-GMO', 'High Yield', 'Disease Resistant', 'Organic Certified'],
+          certification: 'USDA Organic',
+          origin: 'India'
+        },
+        {
+          id: '2',
+          name: 'Premium Vermicompost',
+          category: 'fertilizers',
+          price: 450,
+          rating: 4.8,
+          reviews: 256,
+          image: '/images/products/vermicompost.svg',
+          description: 'Nutrient-rich vermicompost for healthy soil and plants',
+          inStock: true,
+          seller: 'Green Earth Organics',
+          delivery: '1-2 days',
+          features: ['100% Organic', 'Nutrient Rich', 'Improves Soil Health', 'Fast Acting'],
+          certification: 'Organic Certified'
+        },
+        {
+          id: '3',
+          name: 'Natural Neem Oil',
+          category: 'pesticides',
+          price: 189,
+          rating: 4.3,
+          reviews: 89,
+          image: '/images/products/neem-oil.svg',
+          description: 'Natural neem oil pesticide for organic pest control',
+          inStock: true,
+          discount: 15,
+          seller: 'BioCare Solutions',
+          delivery: '3-4 days',
+          features: ['100% Natural', 'Broad Spectrum', 'Safe for Beneficial Insects', 'Eco-Friendly'],
+          certification: 'OMRI Listed'
+        },
+        {
+          id: '4',
+          name: 'Drip Irrigation Kit',
+          category: 'tools',
+          price: 1299,
+          rating: 4.7,
+          reviews: 342,
+          image: '/images/products/drip-irrigation.svg',
+          description: 'Complete drip irrigation system for water-efficient farming',
+          inStock: true,
+          seller: 'Irrigation Pro',
+          delivery: '4-5 days',
+          features: ['Water Efficient', 'Easy Installation', 'Durable Materials', 'Complete Kit'],
+          certification: 'ISO Certified'
+        },
+        {
+          id: '5',
+          name: 'Tomato Hybrid Seeds',
+          category: 'seeds',
+          price: 159,
+          rating: 4.6,
+          reviews: 178,
+          image: '/images/products/tomato-seeds.svg',
+          description: 'High-yield hybrid tomato seeds for commercial cultivation',
+          inStock: true,
+          discount: 5,
+          seller: 'Hybrid Seeds Co.',
+          delivery: '2-3 days',
+          features: ['High Yield', 'Disease Resistant', 'Long Shelf Life', 'Hybrid Variety'],
+          certification: 'Quality Tested'
+        },
+        {
+          id: '6',
+          name: 'Bio Fungicide',
+          category: 'pesticides',
+          price: 275,
+          rating: 4.4,
+          reviews: 145,
+          image: '/images/products/bio-fungicide.svg',
+          description: 'Biological fungicide for effective disease control',
+          inStock: true,
+          seller: 'BioProtect',
+          delivery: '2-3 days',
+          features: ['Biological Control', 'Safe for Environment', 'Broad Spectrum', 'Non-Toxic'],
+          certification: 'Eco Certified'
+        },
+        {
+          id: '7',
+          name: 'Organic Fertilizer Mix',
+          category: 'fertilizers',
+          price: 389,
+          rating: 4.5,
+          reviews: 201,
+          image: '/images/products/fertilizer-bag.svg',
+          description: 'Balanced NPK organic fertilizer mix for all crops',
+          inStock: true,
+          seller: 'NutriGrow Organics',
+          delivery: '2-3 days',
+          features: ['Balanced NPK', 'Slow Release', 'Soil Builder', 'All-Purpose'],
+          certification: 'Organic Certified'
+        },
+        {
+          id: '8',
+          name: 'Garden Tool Set',
+          category: 'tools',
+          price: 899,
+          rating: 4.6,
+          reviews: 167,
+          image: '/images/products/farm-tools.svg',
+          description: 'Professional garden tool set for modern farming',
+          inStock: true,
+          discount: 20,
+          seller: 'FarmTools Pro',
+          delivery: '3-4 days',
+          features: ['Ergonomic Design', 'Rust Resistant', 'Complete Set', 'Professional Grade'],
+          certification: 'Quality Assured'
+        },
+        {
+          id: '9',
+          name: 'Organic Vegetable Seeds Pack',
+          category: 'seeds',
+          price: 199,
+          rating: 4.7,
+          reviews: 289,
+          image: '/images/products/seeds-pack.svg',
+          description: 'Assorted organic vegetable seeds for home gardening',
+          inStock: true,
+          discount: 25,
+          seller: 'Organic Seeds Co.',
+          delivery: '2-3 days',
+          features: ['Heirloom Varieties', 'High Germination', 'Non-GMO', 'Organic Certified'],
+          certification: 'USDA Organic'
+        },
+        {
+          id: '10',
+          name: 'Natural Pesticide Spray',
+          category: 'pesticides',
+          price: 159,
+          rating: 4.4,
+          reviews: 156,
+          image: '/images/products/spray-bottle.svg',
+          description: 'Natural pesticide spray for home garden use',
+          inStock: true,
+          seller: 'EcoGarden Solutions',
+          delivery: '3-4 days',
+          features: ['Ready to Use', 'Child Safe', 'Pet Safe', 'Eco-Friendly'],
+          certification: 'EPA Registered'
+        }
+      ];
+      setProducts(dummyProducts);
     } finally {
       setLoading(false);
     }
@@ -591,7 +751,7 @@ const ModernMarketplaceFixed: React.FC = () => {
             
             {/* Product Details */}
             <div className="flex-1 overflow-y-auto p-6">
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                   <img 
                     src={selectedProduct.image} 
@@ -802,7 +962,7 @@ const ModernMarketplaceFixed: React.FC = () => {
             </div>
             
             {viewMode === 'grid' ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProducts.map(product => (
                   <div key={product.id} onClick={() => setSelectedProduct(product)} className="cursor-pointer">
                     {renderProductCard(product)}
