@@ -1,0 +1,180 @@
+version: '3.9'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: agrismart-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-rootpassword}
+      MONGO_INITDB_DATABASE: agrismart
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - "27017:27017"
+    networks:
+      - agrismart-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Redis Cache (for performance optimization)
+  redis:
+    image: redis:7-alpine
+    container_name: agrismart-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - agrismart-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Python ML Service
+  ml-service:
+    build:
+      context: ./backend/ml
+      dockerfile: ../../Dockerfile.ml
+    container_name: agrismart-ml-service
+    environment:
+      PYTHONUNBUFFERED: 1
+      FLASK_ENV: production
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/ml/models:/app/models
+    networks:
+      - agrismart-network
+    depends_on:
+      - mongodb
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+
+  # Node.js Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../Dockerfile.backend
+    container_name: agrismart-backend
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      MONGODB_URI: mongodb://${MONGO_USERNAME:-root}:${MONGO_PASSWORD:-rootpassword}@mongodb:27017/agrismart?authSource=admin
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key-change-in-production}
+      RAZORPAY_KEY_ID: ${RAZORPAY_KEY_ID}
+      RAZORPAY_KEY_SECRET: ${RAZORPAY_KEY_SECRET}
+      ML_SERVICE_URL: http://ml-service:8000
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/logs:/app/logs
+    networks:
+      - agrismart-network
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ml-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../Dockerfile.frontend
+    container_name: agrismart-frontend
+    environment:
+      VITE_API_URL: http://backend:4000
+      VITE_ML_URL: http://ml-service:8000
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./frontend/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./frontend/ssl:/etc/nginx/ssl:ro
+    networks:
+      - agrismart-network
+    depends_on:
+      - backend
+      - ml-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Nginx Reverse Proxy (optional, for load balancing)
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: agrismart-proxy
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx-proxy.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - agrismart-network
+    depends_on:
+      - frontend
+      - backend
+      - ml-service
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
+    driver: local
+  mongodb_config:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  agrismart-network:
+    driver: bridge
+
+# How to run:
+# 
+# 1. Create .env file with required variables:
+#    MONGO_USERNAME=root
+#    MONGO_PASSWORD=secure_password
+#    JWT_SECRET=your_jwt_secret
+#    RAZORPAY_KEY_ID=your_razorpay_key
+#    RAZORPAY_KEY_SECRET=your_razorpay_secret
+#
+# 2. Build and start all services:
+#    docker-compose up -d --build
+#
+# 3. Check status:
+#    docker-compose ps
+#    docker-compose logs -f
+#
+# 4. Stop services:
+#    docker-compose down
+#    docker-compose down -v  # with volumes
+#
+# 5. Scale specific service:
+#    docker-compose up -d --scale backend=3
