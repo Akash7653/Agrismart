@@ -4,19 +4,19 @@ uvicorn[standard]==0.24.0
 pydantic==2.5.0
 python-multipart==0.0.6
 
-# Data Processing & ML
-numpy==2.1.3
-pandas==2.2.3
-scikit-learn==1.5.1
-joblib==1.4.2
+# Data Processing & ML - Stable versions with pre-built wheels
+numpy==1.24.3
+pandas==2.0.3
+scikit-learn==1.3.2
+joblib==1.3.2
 
 # Image Processing
 pillow==10.0.1
 opencv-python==4.8.1.78
 
-# Time Series & Forecasting (for market price prediction)
+# Time Series & Forecasting
 statsmodels==0.14.0
-scipy==1.14.0
+scipy==1.11.3
 
 # Data Augmentation
 albumentations==1.3.1
