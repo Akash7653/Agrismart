@@ -175,7 +175,12 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
               } bg-clip-text text-transparent`}>24/7</p>
               <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>AI Support</p>
             </div>
-          </div>
+            <div className={`text-center p-3 sm:p-4 md:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
+              isDark
+                ? 'bg-gray-800/50 backdrop-blur border border-gray-700 hover:bg-gray-800/80'
+                : 'bg-white/40 backdrop-blur hover:bg-white/60'
+            }`}>
+              <p className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 bg-gradient-to-r ${
                 isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
               } bg-clip-text text-transparent`}>50K+</p>
               <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Farmers Trust Us</p>
