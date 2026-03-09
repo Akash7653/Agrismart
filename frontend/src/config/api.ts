@@ -1,6 +1,9 @@
 // API Configuration
 export const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://agrismart-7zyv.onrender.com/api';
 
+// ML Service Configuration (Disease Detection, Crop Prediction)
+export const ML_SERVICE_URL = import.meta.env.VITE_ML_URL || 'http://localhost:8001';
+
 // Frontend Configuration
 export const FRONTEND_URL = import.meta.env.VITE_FRONTEND_URL || 'https://agrismart-mu.vercel.app';
 

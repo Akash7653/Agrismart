@@ -125,45 +125,45 @@ const ModernConsultations: React.FC<ConsultationProps> = ({ currentLanguage }) =
 
   const renderExpertCard = (expert: Expert) => (
     <div key={expert.id} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-      <div className="p-6">
-        <div className="flex items-start space-x-4">
-          <div className="relative">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+      <div className="p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div className="relative flex-shrink-0">
+            <div className="w-16 sm:w-20 h-16 sm:h-20 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center text-white text-xl sm:text-2xl font-bold">
               {expert.name.split(' ').map(n => n[0]).join('')}
             </div>
             {expert.verified && (
-              <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+              <div className="absolute -bottom-1 -right-1 w-5 sm:w-6 h-5 sm:h-6 bg-green-500 rounded-full flex items-center justify-center">
                 <CheckCircle className="w-3 h-3 text-white" />
               </div>
             )}
           </div>
           
-          <div className="flex-1">
-            <div className="flex items-start justify-between mb-2">
-              <div>
-                <h3 className="text-xl font-bold text-gray-900">{expert.name}</h3>
-                <p className="text-gray-600 text-sm">{expert.specialty}</p>
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 truncate">{expert.name}</h3>
+                <p className="text-gray-600 text-xs sm:text-sm truncate">{expert.specialty}</p>
               </div>
-              <div className="text-right">
-                <div className="text-2xl font-bold text-green-600">{expert.price}</div>
+              <div className="text-right flex-shrink-0">
+                <div className="text-xl sm:text-2xl font-bold text-green-600">{expert.price}</div>
                 <div className="text-xs text-gray-500">per session</div>
               </div>
             </div>
             
-            <div className="flex items-center space-x-4 mb-3">
-              <div className="flex items-center space-x-1">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-3 text-sm">
+              <div className="flex items-center gap-1">
                 {renderStars(expert.rating)}
-                <span className="text-sm font-medium text-gray-700 ml-1">{expert.rating}</span>
-                <span className="text-sm text-gray-500">({expert.reviews})</span>
+                <span className="font-medium text-gray-700 ml-1">{expert.rating}</span>
+                <span className="text-gray-500 text-xs">({expert.reviews})</span>
               </div>
-              <div className="flex items-center space-x-1 text-sm text-gray-600">
+              <div className="flex items-center gap-1 text-gray-600">
                 <Award className="w-4 h-4" />
-                <span>{expert.experience}</span>
+                <span className="text-xs sm:text-sm">{expert.experience}</span>
               </div>
             </div>
             
-            <div className="flex items-center space-x-2 mb-3">
-              <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+            <div className="flex items-center gap-2 mb-3">
+              <div className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
                 expert.availability === 'Available Today' 
                   ? 'bg-green-100 text-green-700' 
                   : 'bg-yellow-100 text-yellow-700'
@@ -181,20 +181,22 @@ const ModernConsultations: React.FC<ConsultationProps> = ({ currentLanguage }) =
               ))}
             </div>
             
-            <div className="flex space-x-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={() => setSelectedExpert(expert)}
-                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center space-x-1"
+                className="flex-1 px-3 sm:px-4 py-2 sm:py-3 bg-blue-600 text-white text-sm sm:text-base rounded-lg hover:bg-blue-700 active:scale-95 transition-all flex items-center justify-center gap-1 min-h-[40px]"
               >
                 <Video className="w-4 h-4" />
-                <span>Book Video</span>
+                <span className="hidden sm:inline">Book Video</span>
+                <span className="sm:hidden">Video</span>
               </button>
               <button
                 onClick={() => setSelectedExpert(expert)}
-                className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center space-x-1"
+                className="flex-1 px-3 sm:px-4 py-2 sm:py-3 bg-green-600 text-white text-sm sm:text-base rounded-lg hover:bg-green-700 active:scale-95 transition-all flex items-center justify-center gap-1 min-h-[40px]"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Start Chat</span>
+                <span className="hidden sm:inline">Start Chat</span>
+                <span className="sm:hidden">Chat</span>
               </button>
             </div>
           </div>

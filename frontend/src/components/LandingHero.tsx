@@ -76,8 +76,8 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
           </div>
 
           {/* Main Headline */}
-          <div className="max-w-4xl space-y-4 sm:space-y-6 mb-8 sm:mb-12 px-2 sm:px-0">
-            <h1 className={`leading-tight animate-fade-in-up text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`} style={{ animationDelay: '0.1s' }}>
+          <div className="max-w-4xl space-y-3 sm:space-y-4 md:space-y-6 mb-6 sm:mb-8 md:mb-12 px-2 sm:px-0">
+            <h1 className={`leading-tight animate-fade-in-up text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`} style={{ animationDelay: '0.1s' }}>
               <span className="block">AgriSmart AI</span>
               <span className={`bg-clip-text text-transparent bg-gradient-to-r ${
                 isDark 
@@ -90,64 +90,92 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mb-12 sm:mb-16 justify-center w-full sm:w-auto px-2 sm:px-0 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-12 md:mb-16 justify-center w-full sm:w-auto px-2 sm:px-0 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             {/* Start Your Journey Button */}
             <button
               onClick={onGetStarted}
-              className="group relative flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-bold text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-95 overflow-hidden bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 hover:from-green-600 hover:via-emerald-600 hover:to-green-700 whitespace-nowrap"
+              className="group relative flex items-center justify-center gap-2 px-5 sm:px-6 md:px-8 py-3 sm:py-3 md:py-4 text-xs sm:text-sm md:text-lg font-bold text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-95 overflow-hidden bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 hover:from-green-600 hover:via-emerald-600 hover:to-green-700 whitespace-nowrap min-h-[44px] sm:min-h-[48px] md:min-h-auto"
             >
               <span className="relative z-10 flex items-center gap-2">
-                <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
-                Start Your Journey
+                <Zap className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5" />
+                <span className="hidden sm:inline">Start Journey</span>
+                <span className="sm:hidden">Start</span>
               </span>
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 opacity-0 group-hover:opacity-100 transition-opacity relative z-10" />
+              <ArrowRight className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 opacity-0 group-hover:opacity-100 transition-opacity relative z-10 hidden sm:block" />
               <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
             </button>
 
             {/* Learn How AI Works Button */}
             <button
               onClick={onLearnHowAI}
-              className={`group relative flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-lg border-2 transition-all duration-300 hover:-translate-y-0.5 active:scale-95 overflow-hidden whitespace-nowrap ${
+              className={`group relative flex items-center justify-center gap-2 px-5 sm:px-6 md:px-8 py-3 sm:py-3 md:py-4 rounded-xl font-bold text-xs sm:text-sm md:text-lg border-2 transition-all duration-300 hover:-translate-y-0.5 active:scale-95 overflow-hidden whitespace-nowrap min-h-[44px] sm:min-h-[48px] md:min-h-auto ${
                 isDark
                   ? 'bg-gray-800/50 text-blue-300 border-blue-600 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/20'
                   : 'bg-white text-emerald-700 border-emerald-200 hover:border-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20'
               }`}
             >
-              <span className="relative z-10">Learn How AI Works</span>
+              <span className="relative z-10 hidden sm:inline">Learn How AI Works</span>
+              <span className="relative z-10 sm:hidden">Learn AI</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
 
             {/* Join Movement Button */}
             <button
               onClick={onJoinMovement}
-              className="group relative flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-bold text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-95 overflow-hidden bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 whitespace-nowrap"
+              className="group relative flex items-center justify-center gap-2 px-5 sm:px-6 md:px-8 py-3 sm:py-3 md:py-4 text-xs sm:text-sm md:text-lg font-bold text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-95 overflow-hidden bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 whitespace-nowrap min-h-[44px] sm:min-h-[48px] md:min-h-auto"
             >
               <span className="relative z-10 flex items-center gap-2">
-                Join Movement
+                <span className="hidden sm:inline">Join Movement</span>
+                <span className="sm:hidden">Join</span>
               </span>
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 opacity-0 group-hover:opacity-100 transition-opacity relative z-10" />
+              <ArrowRight className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 opacity-0 group-hover:opacity-100 transition-opacity relative z-10 hidden sm:block" />
               <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
             </button>
           </div>
 
           {/* Trust Indicators */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 md:gap-8 max-w-full sm:max-w-2xl mx-auto px-2 sm:px-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <div className={`text-center p-3 sm:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
+          <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-8 max-w-full sm:max-w-2xl mx-auto px-2 sm:px-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <div className={`text-center p-3 sm:p-4 md:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
               isDark
                 ? 'bg-gray-800/50 backdrop-blur border border-gray-700 hover:bg-gray-800/80'
                 : 'bg-white/40 backdrop-blur hover:bg-white/60'
             }`}>
-              <p className={`text-2xl sm:text-3xl font-bold mb-2 bg-gradient-to-r ${
+              <p className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 bg-gradient-to-r ${
                 isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
               } bg-clip-text text-transparent`}>2.5M+</p>
               <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Acres Healed</p>
             </div>
-            <div className={`text-center p-3 sm:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
+            <div className={`text-center p-3 sm:p-4 md:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
               isDark
                 ? 'bg-gray-800/50 backdrop-blur border border-gray-700 hover:bg-gray-800/80'
                 : 'bg-white/40 backdrop-blur hover:bg-white/60'
             }`}>
-              <p className={`text-2xl sm:text-3xl font-bold mb-2 bg-gradient-to-r ${
+              <p className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 bg-gradient-to-r ${
+                isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
+              } bg-clip-text text-transparent`}>50K+</p>
+              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Happy Farmers</p>
+            </div>
+            <div className={`text-center p-3 sm:p-4 md:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
+              isDark
+                ? 'bg-gray-800/50 backdrop-blur border border-gray-700 hover:bg-gray-800/80'
+                : 'bg-white/40 backdrop-blur hover:bg-white/60'
+            }`}>
+              <p className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 bg-gradient-to-r ${
+                isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
+              } bg-clip-text text-transparent`}>99%+</p>
+              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Accuracy Rate</p>
+            </div>
+            <div className={`text-center p-3 sm:p-4 md:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
+              isDark
+                ? 'bg-gray-800/50 backdrop-blur border border-gray-700 hover:bg-gray-800/80'
+                : 'bg-white/40 backdrop-blur hover:bg-white/60'
+            }`}>
+              <p className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 bg-gradient-to-r ${
+                isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
+              } bg-clip-text text-transparent`}>24/7</p>
+              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>AI Support</p>
+            </div>
+          </div>
                 isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
               } bg-clip-text text-transparent`}>50K+</p>
               <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Farmers Trust Us</p>

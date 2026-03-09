@@ -474,3 +474,9 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #15803d;
 }
+
+/* Dynamic Progress Bar */
+.progress-bar-fill {
+  width: var(--progress-width);
+  @apply bg-green-500 h-2 rounded-full transition-all duration-1000;
+}

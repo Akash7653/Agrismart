@@ -1,27 +1,33 @@
 import React, { useState } from 'react';
 import { useTranslation } from '../utils/translations';
+import { ML_SERVICE_URL } from '../config/api';
+import { MapPin, Thermometer, DollarSign, Users, Leaf } from 'lucide-react';
 
 interface CropPredictionProps {
   currentLanguage: string;
 }
-import { MapPin, Thermometer, DollarSign, Users, Leaf } from 'lucide-react';
 
 interface CropFormData {
-  location: string;
-  soilType: string;
-  soilPH: number;
-  climate: string;
-  waterAvailability: string;
-  rainfall: number;
+  nitrogen: number;
+  phosphorus: number;
+  potassium: number;
   temperature: number;
-  workers: number;
-  budget: number;
-  farmSize: number;
+  humidity: number;
+  pH: number;
+  rainfall: number;
 }
 
 interface CropPredictionResult {
+  recommended_crop: string;
+  confidence: number;
+  all_predictions: { [key: string]: number };
+  timestamp: string;
+}
+
+interface PredictionDisplay {
   crop: string;
   suitability: number;
+  confidence: number;
   expectedYield: string;
   profit: string;
   season: string;
@@ -35,24 +41,28 @@ interface CropPredictionResult {
 const CropPrediction: React.FC<CropPredictionProps> = ({ currentLanguage }) => {
   const { t } = useTranslation(currentLanguage);
   const [loading, setLoading] = useState(false);
-  const [prediction, setPrediction] = useState<CropPredictionResult[] | null>(null);
+  const [prediction, setPrediction] = useState<PredictionDisplay[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<CropFormData>({
-    location: '',
-    soilType: '',
-    soilPH: 7,
-    climate: '',
-    waterAvailability: '',
-    rainfall: 0,
-    temperature: 0,
-    workers: 0,
-    budget: 0,
-    farmSize: 0,
+    nitrogen: 50,
+    phosphorus: 50,
+    potassium: 50,
+    temperature: 25,
+    humidity: 60,
+    pH: 7,
+    rainfall: 200,
   });
 
-  // Dummy keys for select options
-  const soilTypeKeys = ['Loamy', 'Sandy', 'Clay', 'Silty'];
-  const climateTypeKeys = ['Tropical', 'Dry', 'Temperate', 'Continental', 'Polar'];
+  // Input ranges for validation
+  const inputRanges = {
+    nitrogen: { min: 0, max: 200, label: 'Nitrogen (mg/kg)' },
+    phosphorus: { min: 0, max: 150, label: 'Phosphorus (mg/kg)' },
+    potassium: { min: 0, max: 200, label: 'Potassium (mg/kg)' },
+    temperature: { min: -20, max: 50, label: 'Temperature (°C)' },
+    humidity: { min: 0, max: 100, label: 'Humidity (%)' },
+    pH: { min: 0, max: 14, label: 'pH Level' },
+    rainfall: { min: 0, max: 3000, label: 'Rainfall (mm)' }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,10 +70,33 @@ const CropPrediction: React.FC<CropPredictionProps> = ({ currentLanguage }) => {
     setError(null);
 
     try {
-      const res = await fetch('http://localhost:8000/crop/predict', {
+      // Validate input ranges
+      const errors: string[] = [];
+      Object.entries(inputRanges).forEach(([key, range]) => {
+        const value = formData[key as keyof CropFormData];
+        if (value < range.min || value > range.max) {
+          errors.push(`${range.label} must be between ${range.min} and ${range.max}`);
+        }
+      });
+
+      if (errors.length > 0) {
+        setError(errors.join('\n'));
+        setLoading(false);
+        return;
+      }
+
+      const res = await fetch(`${ML_SERVICE_URL}/predict-crop`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          N: formData.nitrogen,
+          P: formData.phosphorus,
+          K: formData.potassium,
+          temperature: formData.temperature,
+          humidity: formData.humidity,
+          pH: formData.pH,
+          rainfall: formData.rainfall
+        })
       });
 
       if (!res.ok) {
@@ -71,15 +104,39 @@ const CropPrediction: React.FC<CropPredictionProps> = ({ currentLanguage }) => {
         throw new Error(data?.detail || 'Prediction failed');
       }
 
-      const data: CropPredictionResult[] = await res.json();
-      setPrediction(data);
+      const data: CropPredictionResult = await res.json();
+      
+      // Convert response to array format for display
+      const sortedPredictions = Object.entries(data.all_predictions || {})
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5)
+        .map(([crop, confidence]) => ({
+          crop: crop.charAt(0).toUpperCase() + crop.slice(1),
+          suitability: Math.round(confidence * 100),
+          confidence: confidence,
+          expectedYield: 'Based on inputs',
+          profit: 'Estimated',
+          season: 'Recommended',
+          duration: 'Check climate',
+          waterNeed: formData.humidity > 70 ? 'Low' : 'Medium',
+          laborNeed: 'Standard',
+          marketDemand: 'High',
+          riskFactor: confidence > 0.8 ? 'Low' : 'Medium'
+        }));
+
+      setPrediction(sortedPredictions);
     } catch (err) {
       console.error('Crop prediction error', err);
-      setError('Unable to get crop recommendations right now. Please try again later.');
+      setError('Unable to get crop recommendations. Please check your inputs and try again.');
     } finally {
       setLoading(false);
     }
   };
+
+  const getProgressBarStyle = (percentage: number): React.CSSProperties => ({
+    '--progress-width': `${Math.min(100, percentage)}%`,
+  } as React.CSSProperties);
+
   // ...existing code...
 
   const handleInputChange = (field: keyof CropFormData, value: string | number) => {
@@ -106,162 +163,153 @@ const CropPrediction: React.FC<CropPredictionProps> = ({ currentLanguage }) => {
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    {t('location')}
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.location}
-                    onChange={(e) => handleInputChange('location', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    placeholder={t('location')}
-                    required
-                  />
-                </div>
-
+                {/* Nitrogen Input */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('soilType')}
-                  </label>
-                  <select
-                    value={formData.soilType}
-                    onChange={(e) => handleInputChange('soilType', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    aria-label="Soil type"
-                    title="Soil type"
-                    required
-                  >
-                    <option value="">{t('soilType')}</option>
-                    {soilTypeKeys.map(key => (
-                      <option key={key} value={key}>{t(key)}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('soilPHLabel')} ({formData.soilPH})
-                  </label>
-                  <input
-                    type="range"
-                    min="4"
-                    max="10"
-                    step="0.1"
-                    value={formData.soilPH}
-                    onChange={(e) => handleInputChange('soilPH', parseFloat(e.target.value))}
-                    className="w-full"
-                    aria-label="Soil pH"
-                    title="Soil pH"
-                  />
-                  <div className="flex justify-between text-xs text-gray-500 mt-1">
-                    <span>{t('acidicLabel')}</span>
-                    <span>{t('neutralLabel')}</span>
-                    <span>{t('alkalineLabel')}</span>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('climate')}
-                  </label>
-                  <select
-                    value={formData.climate}
-                    onChange={(e) => handleInputChange('climate', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    aria-label="Climate type"
-                    title="Climate type"
-                    required
-                  >
-                    <option value="">{t('climate')}</option>
-                    {climateTypeKeys.map(key => (
-                      <option key={key} value={key}>{t(key)}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('annualRainfall')}
+                    Nitrogen (N) - mg/kg
+                    <span className="text-xs text-gray-500 ml-1">Min: 0, Max: 200</span>
                   </label>
                   <input
                     type="number"
-                    value={formData.rainfall}
-                    onChange={(e) => handleInputChange('rainfall', parseInt(e.target.value))}
+                    value={formData.nitrogen}
+                    onChange={(e) => handleInputChange('nitrogen', parseFloat(e.target.value))}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    placeholder={t('annualRainfall')}
+                    min="0"
+                    max="200"
+                    step="1"
+                    title="Nitrogen level in mg/kg (0-200)"
+                    aria-label="Nitrogen level in mg/kg"
                     required
                   />
                 </div>
 
+                {/* Phosphorus Input */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Phosphorus (P) - mg/kg
+                    <span className="text-xs text-gray-500 ml-1">Min: 0, Max: 150</span>
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.phosphorus}
+                    onChange={(e) => handleInputChange('phosphorus', parseFloat(e.target.value))}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                    min="0"
+                    max="150"
+                    step="1"
+                    title="Phosphorus level in mg/kg (0-150)"
+                    aria-label="Phosphorus level in mg/kg"
+                    required
+                  />
+                </div>
+
+                {/* Potassium Input */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Potassium (K) - mg/kg
+                    <span className="text-xs text-gray-500 ml-1">Min: 0, Max: 200</span>
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.potassium}
+                    onChange={(e) => handleInputChange('potassium', parseFloat(e.target.value))}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                    min="0"
+                    max="200"
+                    step="1"
+                    title="Potassium level in mg/kg (0-200)"
+                    aria-label="Potassium level in mg/kg"
+                    required
+                  />
+                </div>
+
+                {/* Temperature Input */}
                 <div>
                   <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                     <Thermometer className="w-4 h-4 mr-2" />
-                    {t('avgTemperature')}
+                    Temperature (°C)
+                    <span className="text-xs text-gray-500 ml-1">Min: -20, Max: 50</span>
                   </label>
                   <input
                     type="number"
                     value={formData.temperature}
-                    onChange={(e) => handleInputChange('temperature', parseInt(e.target.value))}
+                    onChange={(e) => handleInputChange('temperature', parseFloat(e.target.value))}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    placeholder={t('avgTemperature')}
-                    aria-label={t('avgTemperature')}
-                    title={t('avgTemperature')}
+                    min="-20"
+                    max="50"
+                    step="0.1"
+                    title="Temperature in degrees Celsius (-20 to 50)"
+                    aria-label="Temperature in degrees Celsius"
                     required
                   />
                 </div>
 
-                <div>
-                  <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                    <Users className="w-4 h-4 mr-2" />
-                    {t('availableWorkers')}
-                  </label>
-                  <input
-                    type="number"
-                    value={formData.workers}
-                    onChange={(e) => handleInputChange('workers', parseInt(e.target.value))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    min="1"
-                    aria-label="Available workers"
-                    title="Available workers"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                    <DollarSign className="w-4 h-4 mr-2" />
-                    {t('budgetCurrency')}
-                  </label>
-                  <input
-                    type="number"
-                    value={formData.budget}
-                    onChange={(e) => handleInputChange('budget', parseInt(e.target.value))}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    placeholder={t('budgetCurrency')}
-                    aria-label={t('budgetCurrency')}
-                    title={t('budgetCurrency')}
-                    required
-                  />
-                </div>
-
+                {/* Humidity Input */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('farmSizeHectares')}
+                    Humidity (%)
+                    <span className="text-xs text-gray-500 ml-1">Min: 0, Max: 100</span>
                   </label>
                   <input
                     type="number"
-                    step="0.1"
-                    value={formData.farmSize}
-                    onChange={(e) => handleInputChange('farmSize', parseFloat(e.target.value))}
+                    value={formData.humidity}
+                    onChange={(e) => handleInputChange('humidity', parseFloat(e.target.value))}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    min="0.1"
-                    aria-label={t('farmSizeHectares')}
-                    title={t('farmSizeHectares')}
+                    min="0"
+                    max="100"
+                    step="1"
+                    title="Relative humidity percentage (0-100)"
+                    aria-label="Humidity percentage"
+                    required
+                  />
+                </div>
+
+                {/* pH Input */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Soil pH Level
+                    <span className="text-xs text-gray-500 ml-1">Min: 0, Max: 14</span>
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.pH}
+                    onChange={(e) => handleInputChange('pH', parseFloat(e.target.value))}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                    min="0"
+                    max="14"
+                    step="0.1"
+                    title="Soil pH level (0-14)"
+                    aria-label="Soil pH level"
+                    required
+                  />
+                </div>
+
+                {/* Rainfall Input */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Annual Rainfall (mm)
+                    <span className="text-xs text-gray-500 ml-1">Min: 0, Max: 3000</span>
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.rainfall}
+                    onChange={(e) => handleInputChange('rainfall', parseFloat(e.target.value))}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                    min="0"
+                    max="3000"
+                    step="10"
+                    title="Annual rainfall in millimeters (0-3000)"
+                    aria-label="Annual rainfall in millimeters"
                     required
                   />
                 </div>
               </div>
+
+              {error && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                  <p className="text-sm text-red-700 whitespace-pre-line">{error}</p>
+                </div>
+              )}
 
               <button
                 type="submit"
@@ -306,38 +354,42 @@ const CropPrediction: React.FC<CropPredictionProps> = ({ currentLanguage }) => {
                 <h3 className="text-2xl font-bold text-gray-900">
                   {t('recommendedCrops')}
                 </h3>
-                {prediction.map((crop: CropPredictionResult, index: number) => (
+                {prediction.map((crop: PredictionDisplay, index: number) => (
                   <div key={index} className="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-all duration-300">
                     <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                      <div className="flex items-center space-x-3 flex-1">
+                        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                           <Leaf className="w-6 h-6 text-green-600" />
                         </div>
-                        <div>
+                        <div className="flex-1">
                           <h4 className="text-xl font-bold text-gray-900">{crop.crop}</h4>
-                          <div className="flex items-center space-x-2 mt-1">
-                            <div className="w-full bg-gray-200 rounded-full h-2">
-                              <div className={`bg-green-500 h-2 rounded-full transition-all duration-1000 w-[${crop.suitability}%]`}></div>
+                          <div className="flex items-center gap-2 mt-2">
+                            <div className="flex-1 bg-gray-200 rounded-full h-2 max-w-xs overflow-hidden">
+                              {/* Dynamic width for progress bar - CSS custom property in style is necessary */}
+                              <div 
+                                className="progress-bar-fill"
+                                style={getProgressBarStyle(crop.suitability)}
+                              ></div>
                             </div>
-                            <span className="text-sm font-medium text-green-600">
+                            <span className="text-sm font-medium text-green-600 whitespace-nowrap">
                               {crop.suitability}% Match
                             </span>
                           </div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-green-600">{crop.profit}</div>
-                        <div className="text-sm text-gray-500">{t('expectedProfit')}</div>
+                      <div className="text-right ml-4 flex-shrink-0">
+                        <div className="text-2xl font-bold text-green-600">{Math.round(crop.confidence * 100)}%</div>
+                        <div className="text-sm text-gray-500">{t('confidence')}</div>
                       </div>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
                       <div className="text-center p-3 bg-blue-50 rounded-lg">
-                        <div className="font-semibold text-blue-600">{crop.expectedYield}</div>
-                        <div className="text-xs text-blue-500">{t('expectedYield')}</div>
+                        <div className="font-semibold text-blue-600">{crop.season}</div>
+                        <div className="text-xs text-blue-500">{t('seasonLabel')}</div>
                       </div>
                       <div className="text-center p-3 bg-purple-50 rounded-lg">
-                        <div className="font-semibold text-purple-600">{crop.duration}</div>
-                        <div className="text-xs text-purple-500">{t('durationLabel')}</div>
+                        <div className="font-semibold text-purple-600">{crop.waterNeed}</div>
+                        <div className="text-xs text-purple-500">{t('waterNeedLabel')}</div>
                       </div>
                       <div className="text-center p-3 bg-orange-50 rounded-lg">
                         <div className="font-semibold text-orange-600">{crop.marketDemand}</div>
@@ -350,7 +402,7 @@ const CropPrediction: React.FC<CropPredictionProps> = ({ currentLanguage }) => {
                     </div>
                     <div className="mt-4 flex justify-between items-center">
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        {crop.season} {t('seasonLabel')}
+                        {crop.laborNeed} Labor Requirement
                       </span>
                       <button className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors">
                         {t('selectThisCrop')}

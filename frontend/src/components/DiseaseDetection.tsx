@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Camera, Upload, AlertTriangle, CheckCircle, Info, Phone } from 'lucide-react';
 import { useTranslation, raw } from '../utils/translations';
+import { ML_SERVICE_URL } from '../config/api';
 
 interface DetectionResult {
   disease: string;
@@ -172,93 +173,74 @@ const DiseaseDetection: React.FC<DiseaseDetectionProps> = ({ currentLanguage }) 
     
     setIsAnalyzing(true);
     
-    // Simulate AI analysis
-    setTimeout(() => {
-      const mockResults: Array<DetectionResult & { id: string }> = [
-        {
-          id: 'lateBlight',
-          disease: 'Late Blight (Phytophthora infestans)',
-          confidence: 94,
-          severity: 'High',
-          description: 'Late blight is a devastating disease affecting potatoes and tomatoes, caused by the water mold Phytophthora infestans. It can destroy entire crops within days under favorable conditions.',
-          causes: [
-            'High humidity (>90%)',
-            'Temperature between 15-20°C',
-            'Prolonged leaf wetness',
-            'Poor air circulation',
-            'Infected seed tubers'
-          ],
-          treatments: [
-            'Apply copper-based fungicides immediately',
-            'Use systemic fungicides like metalaxyl',
-            'Remove and destroy infected plants',
-            'Improve drainage and air circulation',
-            'Apply protective sprays every 7-14 days'
-          ],
-          prevention: [
-            'Use certified disease-free seeds',
-            'Plant resistant varieties',
-            'Ensure proper spacing for air circulation',
-            'Avoid overhead watering',
-            'Regular monitoring and early detection'
-          ],
-          affectedArea: 35
-        },
-        {
-          id: 'earlyBlight',
-          disease: 'Early Blight (Alternaria solani)',
-          confidence: 87,
-          severity: 'Medium',
-          description: 'Early blight is a common fungal disease affecting tomatoes and potatoes, characterized by dark spots with concentric rings on leaves.',
-          causes: [
-            'High temperatures (24-29°C)',
-            'High humidity',
-            'Plant stress',
-            'Poor nutrition',
-            'Wounds from insects or pruning'
-          ],
-          treatments: [
-            'Apply fungicides containing chlorothalonil',
-            'Remove affected leaves immediately',
-            'Improve plant nutrition',
-            'Ensure proper watering practices',
-            'Use crop rotation strategies'
-          ],
-          prevention: [
-            'Maintain proper plant spacing',
-            'Water at soil level, not on leaves',
-            'Apply mulch to prevent soil splash',
-            'Regular pruning of lower branches',
-            'Balanced fertilization'
-          ],
-          affectedArea: 20
+    try {
+      // Convert base64 image to blob
+      const response = await fetch(selectedImage);
+      const blob = await response.blob();
+      
+      // Create FormData for multipart upload
+      const formData = new FormData();
+      formData.append('file', blob, `disease_detection_${Date.now()}.jpg`);
+      
+      // Call the actual ML API endpoint
+      const mlResponse = await fetch(`${ML_SERVICE_URL}/detect-disease`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          // Don't set Content-Type, browser will set it with boundary
         }
-      ];
-
-      // Randomly select one result
-      const result = mockResults[Math.floor(Math.random() * mockResults.length)];
-      // if translations exist for this disease, use them
-      // Prefer translated disease name/description when available via the t() helper
-      const diseaseId = (result as DetectionResult & { id?: string }).id;
-      let translatedName = result.disease;
-      let translatedDesc = result.description;
-      if (diseaseId) {
-        const nameKey = `diseases.${diseaseId}.name`;
-        const descKey = `diseases.${diseaseId}.description`;
-        try {
-          const maybeName = t(nameKey);
-          const maybeDesc = t(descKey);
-          // t() falls back to English or the key, so only use if different from the key
-          if (maybeName && !maybeName.startsWith('diseases.')) translatedName = maybeName;
-          if (maybeDesc && !maybeDesc.startsWith('diseases.')) translatedDesc = maybeDesc;
-        } catch {
-          // ignore translation resolution errors
-        }
+      });
+      
+      // Handle error responses
+      if (!mlResponse.ok) {
+        const errorData = await mlResponse.json();
+        const errorMessage = errorData.detail || 'Unknown error occurred';
+        
+        // Display user-friendly error messages
+        setDetectionResult(null);
+        setIsAnalyzing(false);
+        
+        // Show error notification
+        alert(`⚠️ Image Validation Failed:\n\n${errorMessage}\n\nPlease upload a clear image of a plant leaf.`);
+        console.error('API Error:', errorData);
+        return;
       }
-
-      setDetectionResult({ ...result, disease: translatedName, description: translatedDesc });
+      
+      // Parse successful response
+      const result = await mlResponse.json();
+      
+      // Check if confidence is below threshold (API should reject, but double-check)
+      if (result.confidence < 0.5) {
+        alert(`⚠️ Low Confidence (${(result.confidence * 100).toFixed(1)}%)\n\nPlease upload a clearer image of the affected leaf.`);
+        setDetectionResult(null);
+        setIsAnalyzing(false);
+        return;
+      }
+      
+      // Format result for display
+      const formattedResult: DetectionResult = {
+        disease: result.disease.replace(/_/g, ' '),
+        confidence: Math.round(result.confidence * 100),
+        severity: result.severity as 'Low' | 'Medium' | 'High',
+        description: `Detected disease with ${(result.confidence * 100).toFixed(1)}% confidence. This disease has been identified as requiring ${result.severity.toLowerCase()} priority treatment.`,
+        causes: ['High humidity', 'Warm temperatures', 'Poor air circulation', 'Leaf wetness', 'Low plant immunity'],
+        treatments: result.treatment || ['Consult agricultural expert'],
+        prevention: ['Monitor plants regularly', 'Maintain proper spacing', 'Ensure good drainage', 'Avoid overhead watering'],
+        affectedArea: Math.max(20, Math.ceil(result.confidence * 100))
+      };
+      
+      setDetectionResult(formattedResult);
       setIsAnalyzing(false);
-    }, 3000);
+      
+    } catch (error) {
+      console.error('Error analyzing image:', error);
+      
+      // Network or connection error
+      alert(`❌ Analysis Failed\n\nCould not connect to ML service. Please ensure:\n1. Backend server is running\n2. ML service is available\n3. Internet connection is stable\n\nError: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      
+      setDetectionResult(null);
+      setIsAnalyzing(false);
+    }
   };
 
   const getSeverityColor = (severity: string) => {
@@ -348,14 +330,18 @@ const DiseaseDetection: React.FC<DiseaseDetectionProps> = ({ currentLanguage }) 
                 <div className="flex justify-center mt-4 space-x-4">
                   <button
                     onClick={capturePhoto}
-                    className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors flex items-center"
+                    className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors flex items-center min-h-[44px]"
+                    aria-label="Capture photo from camera"
+                    title="Take a photo of the plant leaf"
                   >
                     <Camera className="w-5 h-5 mr-2" />
                     Capture Photo
                   </button>
                   <button
                     onClick={closeCamera}
-                    className="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors"
+                    className="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors min-h-[44px]"
+                    aria-label="Close camera"
+                    title="Close the camera modal"
                   >
                     {t('cancel')}
                   </button>
@@ -408,7 +394,9 @@ const DiseaseDetection: React.FC<DiseaseDetectionProps> = ({ currentLanguage }) 
                   <button
                     onClick={analyzeImage}
                     disabled={isAnalyzing}
-                    className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors font-semibold disabled:opacity-50"
+                    className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors font-semibold disabled:opacity-50 min-h-[44px]"
+                    aria-label="Analyze selected image for plant diseases"
+                    title="Upload image to detect plant diseases"
                   >
                     {isAnalyzing ? (
                       <div className="flex items-center justify-center">
@@ -428,7 +416,8 @@ const DiseaseDetection: React.FC<DiseaseDetectionProps> = ({ currentLanguage }) 
                 onChange={handleImageUpload}
                 accept="image/*"
                 className="hidden"
-                title="Upload crop image"
+                title="Upload crop image for disease detection"
+                aria-label="Upload plant leaf image for disease analysis"
                 placeholder="Select an image file"
               />
             </div>
@@ -438,7 +427,9 @@ const DiseaseDetection: React.FC<DiseaseDetectionProps> = ({ currentLanguage }) 
               <h4 className="text-lg font-semibold text-gray-900 mb-4">{t('takePhoto')}</h4>
               <button 
                 onClick={openCamera}
-                className="w-full bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium flex items-center justify-center"
+                className="w-full bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium flex items-center justify-center min-h-[44px]"
+                aria-label="Open camera to capture plant image"
+                title="Use camera to take a photo of the plant"
               >
                 <Camera className="w-5 h-5 mr-2" />
                 {t('openCamera')}
@@ -547,16 +538,18 @@ const DiseaseDetection: React.FC<DiseaseDetectionProps> = ({ currentLanguage }) 
                   <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-gray-200">
                     <button
                       onClick={() => { window.location.hash = '#consultations'; window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                      className="flex-1 bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-colors font-semibold flex items-center justify-center"
-                      aria-label="Consult Expert"
+                      className="flex-1 bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-colors font-semibold flex items-center justify-center min-h-[44px] sm:min-h-auto"
+                      aria-label="Consult agricultural expert for disease treatment"
+                      title="Get expert advice from agricultural consultants"
                     >
                       <Phone className="w-4 h-4 mr-2" />
                       {t('consultExpert') || 'Consult Expert'}
                     </button>
                     <button
                       onClick={() => { window.location.hash = '#marketplace'; window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                      className="flex-1 bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors font-semibold"
-                      aria-label="Order Treatment"
+                      className="flex-1 bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors font-semibold min-h-[44px] sm:min-h-auto"
+                      aria-label="Order treatment products for detected disease"
+                      title="Purchase treatment products from marketplace"
                     >
                       {t('orderTreatment') || 'Order Treatment'}
                     </button>

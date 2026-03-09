@@ -147,19 +147,19 @@ const ChatBot: React.FC = () => {
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-4 right-4 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-110 ${
+        className={`fixed bottom-4 left-4 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-110 ${
           isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
         aria-label="Open chat"
         title="Open chat"
       >
         <MessageCircle className="w-6 h-6" />
-        <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
+        <div className="absolute -top-2 -left-2 w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
       </button>
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-4 right-4 z-50 w-80 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col">
+        <div className="fixed bottom-4 left-4 z-50 w-80 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col">
           {/* Header */}
           <div className="bg-green-500 text-white p-2 rounded-t-2xl flex items-center justify-between">
             <div className="flex items-center space-x-2">
