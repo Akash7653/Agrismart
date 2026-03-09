@@ -173,17 +173,36 @@ const DiseaseDetection: React.FC<DiseaseDetectionProps> = ({ currentLanguage }) 
     
     setIsAnalyzing(true);
     
+    console.log('🦠 [DiseaseDetection] Analysis started');
+    console.log('🦠 [DiseaseDetection] ML Service URL:', ML_SERVICE_URL);
+    console.log('🦠 [DiseaseDetection] Selected Image:', selectedImage.substring(0, 100) + '...');
+    
     try {
       // Convert base64 image to blob
       const response = await fetch(selectedImage);
       const blob = await response.blob();
+      console.log('🦠 [DiseaseDetection] Image blob created, size:', blob.size, 'bytes');
       
       // Create FormData for multipart upload
       const formData = new FormData();
       formData.append('file', blob, `disease_detection_${Date.now()}.jpg`);
       
+      console.log('🦠 [DiseaseDetection] FormData entries:');
+      for (let [key, value] of formData.entries()) {
+        if (value instanceof File) {
+          console.log(`  ├─ ${key}: File(name: "${value.name}", size: ${value.size} bytes, type: "${value.type}")`);
+        } else {
+          console.log(`  └─ ${key}:`, value);
+        }
+      }
+      
+      const mlEndpoint = `${ML_SERVICE_URL}/detect-disease`;
+      console.log('🦠 [DiseaseDetection] 📡 API Endpoint:', mlEndpoint);
+      console.log('🦠 [DiseaseDetection] 📊 Request Method: POST');
+      console.log('🦠 [DiseaseDetection] ⏳ Sending request...');
+      
       // Call the actual ML API endpoint
-      const mlResponse = await fetch(`${ML_SERVICE_URL}/detect-disease`, {
+      const mlResponse = await fetch(mlEndpoint, {
         method: 'POST',
         body: formData,
         headers: {
@@ -192,25 +211,34 @@ const DiseaseDetection: React.FC<DiseaseDetectionProps> = ({ currentLanguage }) 
       });
       
       // Handle error responses
+      console.log('🦠 [DiseaseDetection] ✅ API Response received');
+      console.log('🦠 [DiseaseDetection] 📋 Response Status:', mlResponse.status, mlResponse.statusText);
+      console.log('🦠 [DiseaseDetection] 📋 Response Headers:', {
+        contentType: mlResponse.headers.get('content-type'),
+        contentLength: mlResponse.headers.get('content-length')
+      });
+      
       if (!mlResponse.ok) {
         const errorData = await mlResponse.json();
         const errorMessage = errorData.detail || 'Unknown error occurred';
         
+        console.error('🦠 [DiseaseDetection] ❌ API Error Response:', errorData);
         // Display user-friendly error messages
         setDetectionResult(null);
         setIsAnalyzing(false);
         
         // Show error notification
         alert(`⚠️ Image Validation Failed:\n\n${errorMessage}\n\nPlease upload a clear image of a plant leaf.`);
-        console.error('API Error:', errorData);
         return;
       }
       
       // Parse successful response
       const result = await mlResponse.json();
+      console.log('🦠 [DiseaseDetection] 📦 Full API Response Data:', result);
       
       // Check if confidence is below threshold (API should reject, but double-check)
       if (result.confidence < 0.5) {
+        console.warn('🦠 [DiseaseDetection] ⚠️ Low Confidence:', (result.confidence * 100).toFixed(1) + '%');
         alert(`⚠️ Low Confidence (${(result.confidence * 100).toFixed(1)}%)\n\nPlease upload a clearer image of the affected leaf.`);
         setDetectionResult(null);
         setIsAnalyzing(false);
@@ -229,11 +257,21 @@ const DiseaseDetection: React.FC<DiseaseDetectionProps> = ({ currentLanguage }) 
         affectedArea: Math.max(20, Math.ceil(result.confidence * 100))
       };
       
+      console.log('🦠 [DiseaseDetection] 🔄 Parsed Result:', {
+        disease: formattedResult.disease,
+        confidence: formattedResult.confidence + '%',
+        severity: formattedResult.severity
+      });
+      console.log('🦠 [DiseaseDetection] 📋 Full Formatted Result:', formattedResult);
       setDetectionResult(formattedResult);
       setIsAnalyzing(false);
       
     } catch (error) {
-      console.error('Error analyzing image:', error);
+      console.error('🦠 [DiseaseDetection] ❌ Error:', error);
+      if (error instanceof Error) {
+        console.error('🦠 [DiseaseDetection] Error Message:', error.message);
+        console.error('🦠 [DiseaseDetection] Error Stack:', error.stack);
+      }
       
       // Network or connection error
       alert(`❌ Analysis Failed\n\nCould not connect to ML service. Please ensure:\n1. Backend server is running\n2. ML service is available\n3. Internet connection is stable\n\nError: ${error instanceof Error ? error.message : 'Unknown error'}`);

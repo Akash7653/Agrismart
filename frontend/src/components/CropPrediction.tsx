@@ -85,26 +85,43 @@ const CropPrediction: React.FC<CropPredictionProps> = ({ currentLanguage }) => {
         return;
       }
 
-      const res = await fetch(`${ML_SERVICE_URL}/predict-crop`, {
+      const requestBody = {
+        N: formData.nitrogen,
+        P: formData.phosphorus,
+        K: formData.potassium,
+        temperature: formData.temperature,
+        humidity: formData.humidity,
+        pH: formData.pH,
+        rainfall: formData.rainfall
+      };
+      
+      console.log('🌾 [CropPrediction] 📦 Request Body:', requestBody);
+      const mlEndpoint = `${ML_SERVICE_URL}/predict-crop`;
+      console.log('🌾 [CropPrediction] 📡 API Endpoint:', mlEndpoint);
+      console.log('🌾 [CropPrediction] ⏳ Sending request...');
+
+      const res = await fetch(mlEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          N: formData.nitrogen,
-          P: formData.phosphorus,
-          K: formData.potassium,
-          temperature: formData.temperature,
-          humidity: formData.humidity,
-          pH: formData.pH,
-          rainfall: formData.rainfall
-        })
+        body: JSON.stringify(requestBody)
       });
 
+      console.log('🌾 [CropPrediction] ✅ API Response received');
+      console.log('🌾 [CropPrediction] 📋 Response Status:', res.status, res.statusText);
+      console.log('🌾 [CropPrediction] 📋 Response Headers:', {
+        contentType: res.headers.get('content-type'),
+        contentLength: res.headers.get('content-length')
+      });
+      
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
+        console.error('🌾 [CropPrediction] ❌ API Error Response:', data);
         throw new Error(data?.detail || 'Prediction failed');
       }
 
       const data: CropPredictionResult = await res.json();
+      console.log('🌾 [CropPrediction] 📦 Full API Response Data:', data);
+      console.log('🌾 [CropPrediction] 📋 All Predictions (raw):', data.all_predictions);
       
       // Convert response to array format for display
       const sortedPredictions = Object.entries(data.all_predictions || {})
@@ -124,9 +141,21 @@ const CropPrediction: React.FC<CropPredictionProps> = ({ currentLanguage }) => {
           riskFactor: confidence > 0.8 ? 'Low' : 'Medium'
         }));
 
+      console.log('🌾 [CropPrediction] 🔄 Processed Predictions (Top 5):', sortedPredictions);
+      console.table(sortedPredictions.map(p => ({
+        crop: p.crop,
+        suitability: p.suitability + '%',
+        confidence: (p.confidence * 100).toFixed(2) + '%'
+      })));
+      
       setPrediction(sortedPredictions);
+      console.log('🌾 [CropPrediction] ✅ Prediction successful! Data set to state.');
     } catch (err) {
-      console.error('Crop prediction error', err);
+      console.error('🌾 [CropPrediction] ❌ Error:', err);
+      if (err instanceof Error) {
+        console.error('🌾 [CropPrediction] Error Message:', err.message);
+        console.error('🌾 [CropPrediction] Error Stack:', err.stack);
+      }
       setError('Unable to get crop recommendations. Please check your inputs and try again.');
     } finally {
       setLoading(false);
