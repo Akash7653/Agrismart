@@ -350,6 +350,49 @@
       "continuous": "Continuous Investment - Revenue funds better AI, more experts, and new features for you."
     },
     
+    "revenueModel": {
+      "badge": "We're Transparent by Design",
+      "title": "Our Revenue Model Works For Farmers",
+      "subtitle": "We don't exploit farmers. We partner with them. Here's exactly how we make money—and why it aligns with your success.",
+      "earnRevenueTitle": "How We Earn Revenue",
+      "stream1": {
+        "title": "Premium Consultation",
+        "description": "Global AgriScientist consultations"
+      },
+      "stream2": {
+        "title": "Marketplace Commission",
+        "description": "Organic seeds, tools, IoT sensors"
+      },
+      "stream3": {
+        "title": "AI Premium Features",
+        "description": "Advanced prediction models"
+      },
+      "stream4": {
+        "title": "Farm Aggregation",
+        "description": "Connect farms to bulk buyers"
+      },
+      "whyWorksTitle": "💚 Why This Works",
+      "whyWorksDesc": "Each revenue stream directly benefits farmers through features, tools, consultants, and market access.",
+      "whereGoesTitle": "Where Revenue Goes",
+      "everyHundred": "Every $100 from our platform:",
+      "farmerEarnings": "Farmer Earnings",
+      "agrismart": "AgriSmart Cut",
+      "platformCosts": "Platform Costs",
+      "noHiddenFees": "No Hidden Fees",
+      "noHiddenFeesDesc": "No exploitation. Transparent pricing always.",
+      "ourGrowth": "Our Growth = Your Growth",
+      "ourGrowthDesc": "As farmers earn more, we invest more in features.",
+      "sustainable": "We're Sustainable",
+      "sustainableDesc": "Reinvesting profits into tech, consultants, and farmers.",
+      "benefitsTitle": "Why This Model Benefits You",
+      "alignedIncentives": "Aligned Incentives",
+      "alignedDesc": "We win only when farmers win. Your success is our success.",
+      "noMonopoly": "No Farm Monopoly",
+      "noMonopolyDesc": "We're a partner, not a middleman. Farmers keep 75%+ of earnings.",
+      "continuousInvestment": "Continuous Investment",
+      "continuousDesc": "Revenue funds better AI, more experts, and new features for you."
+    },
+    
     "cta": {
       "title": "Join the Organic Revolution",
       "subtitle": "Stop fighting nature. Start working with it. Let AI amplify your farming wisdom and heal the planet.",
