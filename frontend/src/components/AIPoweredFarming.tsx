@@ -70,7 +70,7 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
   ];
 
   return (
-    <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-emerald-900 to-gray-900 overflow-hidden">
+    <section className="relative py-40 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-emerald-900 to-gray-900 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-1/4 w-96 h-96 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
@@ -95,7 +95,7 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-24">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (

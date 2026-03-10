@@ -57,7 +57,7 @@ export const RevenueModel: React.FC = () => {
   ];
 
   return (
-    <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+    <section className="relative py-40 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
@@ -82,7 +82,7 @@ export const RevenueModel: React.FC = () => {
         </div>
 
         {/* Two Column Layout */}
-        <div className="grid md:grid-cols-2 gap-12 mb-20">
+        <div className="grid md:grid-cols-2 gap-16 mb-24">
           {/* Left: Revenue Streams */}
           <div>
             <h3 className="text-3xl font-bold text-gray-900 mb-8">{t('revenueModel.earnRevenueTitle', 'How We Earn Revenue')}</h3>

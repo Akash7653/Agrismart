@@ -58,7 +58,7 @@ export const Testimonials: React.FC = () => {
   const current = testimonials[currentIndex];
 
   return (
-    <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-green-50 overflow-hidden">
+    <section className="relative py-40 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-green-50 overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 right-20 w-72 h-72 bg-green-400 rounded-full mix-blend-multiply filter blur-3xl"></div>

@@ -41,7 +41,7 @@ export const ProblemSection: React.FC = () => {
   ];
 
   return (
-    <section className={`relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 ${
+    <section className={`relative py-40 px-4 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 ${
       isDark
         ? 'bg-gradient-to-b from-gray-950 to-gray-900'
         : 'bg-gradient-to-b from-gray-900 to-gray-800'

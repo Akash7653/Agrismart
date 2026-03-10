@@ -85,7 +85,7 @@ export const TraditionalFarming: React.FC = () => {
   ];
 
   return (
-    <section className={`relative py-32 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
+    <section className={`relative py-40 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
       isDark
         ? 'bg-gradient-to-b from-gray-900 via-gray-950 to-gray-900'
         : 'bg-gradient-to-b from-green-50 to-amber-50'
@@ -108,7 +108,7 @@ export const TraditionalFarming: React.FC = () => {
         </div>
 
         {/* Methods Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-24">
           {methods.map((method, index) => (
             <div
               key={index}
