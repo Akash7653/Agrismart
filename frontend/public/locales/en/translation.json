@@ -14,5 +14,234 @@
   "history": "History",
   "signIn": "Sign In",
   "signOut": "Sign Out",
-  "selectLanguage": "Select Language"
+  "selectLanguage": "Select Language",
+  
+  "landing": {
+    "headline": "Farming That Heals the Earth",
+    "subheadline": "AI-powered organic farming for sustainable yields and healthy soil",
+    "acresHealed": "Acres Healed",
+    "happyFarmers": "Happy Farmers",
+    "accuracyRate": "Accuracy Rate",
+    "aiSupport": "AI Support",
+    "farmersCount": "Farmers Trust Us",
+    "countries": "Countries",
+    "yieldIncrease": "Yield Increase",
+    "scrollExplore": "Scroll To Explore",
+    
+    "problem": {
+      "title": "The Problem We Cannot Ignore",
+      "subtitle": "Chemical farming promised progress. It's delivered poison. Here's what we're losing:",
+      "soilDegradation": "Soil Degradation",
+      "soilDesc": "Chemical farming depletes soil in 20-30 years. Our soil is dying faster than we can regenerate it.",
+      "chemicals": "Tons of Chemicals",
+      "chemicalsDesc": "Annual pesticide use worldwide. Poisoning groundwater and harming farm workers every day.",
+      "deaths": "Deaths Annually",
+      "deathsDesc": "Pesticide exposure causes 1+ million preventable deaths every year globally.",
+      "nutrition": "Nutrition Loss",
+      "nutritionDesc": "Chemical crops have 60% fewer minerals than organic produce. Our food is empty.",
+      "conclusion": "We're losing the fight against soil degradation, toxins, and corporate greed.",
+      "hope": "But there's hope. Traditional farming methods work. AI amplifies them. And farmers are ready to change."
+    },
+    
+    "ancient": {
+      "title": "Ancient Wisdom for Modern Times",
+      "subtitle": "Organic farming isn't new. It's timeless. Proven across cultures for millennia.",
+      "india": {
+        "title": "Cow-Dung Farming",
+        "location": "Ancient India",
+        "benefits": ["Soil regeneration", "Natural nitrogen", "Biodiversity boost", "Water retention"]
+      },
+      "americas": {
+        "title": "The Three Sisters",
+        "location": "Indigenous Americas",
+        "desc": "Companion planting: corn, beans, and squash together. Maximizes yield while regenerating soil.",
+        "benefits": ["Pest control", "Nutrient cycling", "Increased yield", "Drought resilient"]
+      },
+      "africa": {
+        "title": "Agroforestry",
+        "location": "African Tradition",
+        "desc": "Integrating trees with crops. Prevents erosion, fixes carbon, and provides diverse harvest.",
+        "benefits": ["Carbon sequester", "Erosion control", "Biodiversity", "Extra income"]
+      }
+    },
+    
+    "comparison": {
+      "title": "Traditional vs Chemical Farming",
+      "subtitle": "Comprehensive impact comparison that tells the real story",
+      "traditional": "Traditional Farming",
+      "chemical": "Chemical Farming",
+      "soilQuality": "Soil Quality",
+      "waterUsage": "Water Usage",
+      "workerHealth": "Worker Health",
+      "foodQuality": "Food Quality",
+      "cost": "Cost",
+      "climate": "Climate Impact",
+      "sustainable": "Sustainable & Beneficial",
+      "harmful": "Harmful & Unsustainable",
+      "conclusion": "These methods work. We combine them with AI for maximum impact."
+    },
+    
+    "why_now": {
+      "title": "Why Now? The Perfect Moment",
+      "subtitle": "Consumers demand organic. Farmers want to transition. Technology makes it possible. The planet can't wait any longer.",
+      "market": "Global organic market value",
+      "marketGrowth": "Growing 30% CAGR",
+      "consumers": "Consumers prefer organic",
+      "consumersGrowth": "Even at premium prices",
+      "farmers": "Farmers want to transition",
+      "farmersGrowth": "But lack AI & tech support"
+    },
+    
+    "global": {
+      "title": "Global Movement Growing Stronger",
+      "india": {
+        "country": "India",
+        "farmers": "30M+ Farmers",
+        "growth": "25% yearly growth",
+        "desc": "Leading organic farming adoption. 6 million certified organic farms."
+      },
+      "costarica": {
+        "country": "Costa Rica",
+        "farms": "25% Organic",
+        "growth": "3x increase in 10 years",
+        "desc": "Agriculture is 25% certified organic. Carbon neutral by 2050 goal."
+      },
+      "kenya": {
+        "country": "Kenya",
+        "farmers": "500K+ Farmers",
+        "growth": "40% yield increase",
+        "desc": "Agroforestry movement spreading. Drought-resistant crops thriving."
+      },
+      "armenia": {
+        "country": "Armenia",
+        "rate": "100% Candidate",
+        "policy": "Policy-driven transition",
+        "desc": "First EU country pursuing 100% organic goal by 2050."
+      }
+    },
+    
+    "opportunities": {
+      "demand": "Demand Crisis",
+      "demandDesc": "Consumers are willing to pay premium prices for organic. Supply can't meet demand.",
+      "policy": "Policy Shift",
+      "policyDesc": "Governments incentivizing organic farming. EU subsidies, India's promotion of natural farming.",
+      "readiness": "Farmer Readiness",
+      "readinessDesc": "Farmers know organic is better. They just need AI tools, consultants, and market access.",
+      "moment": "This is the moment. AgriSmart closes the gap.",
+      "conclusion": "We connect farmer readiness with consumer demand using AI power."
+    },
+    
+    "features": {
+      "title": "Technology That Amplifies Nature",
+      "subtitle": "AI isn't meant to replace farming. It amplifies ancient wisdom. Three tools. Infinite possibilities.",
+      
+      "crop": {
+        "title": "Crop Prediction Engine",
+        "desc": "AI analyzes soil data, weather patterns, and historical yields to recommend the perfect crops for your land.",
+        "accuracy": "97% accuracy",
+        "updates": "Real-time updates",
+        "recommendation": "Multi-crop recommendation",
+        "features": ["Soil analysis", "Weather forecast", "Market demand", "Yield prediction"]
+      },
+      
+      "disease": {
+        "title": "Disease Detection AI",
+        "desc": "Smartphone camera + ML model identifies plant diseases instantly. Stop problems before they spread.",
+        "detection": "Real-time detection",
+        "accuracy": "94% accuracy",
+        "guide": "Treatment guide",
+        "features": ["Image recognition", "Treatment suggestions", "Organic solutions", "Prevention tips"]
+      },
+      
+      "monitor": {
+        "title": "Smart Farm Monitor",
+        "desc": "IoT sensors track soil moisture, nutrient levels, and crop health 24/7 with AI-powered alerts.",
+        "alerts": "Real-time alerts",
+        "optimization": "Water optimization",
+        "yield": "Yield increase 40%",
+        "features": ["Soil sensors", "Weather data", "Health alerts", "Resource optimization"]
+      }
+    },
+    
+    "howWorks": {
+      "title": "How It Works Together",
+      "step1": "Assess Your Farm",
+      "step1Desc": "Smart sensors + AI analyze soil, weather, crops",
+      "step2": "Get Smart Recommendations",
+      "step2Desc": "AI suggests crops, treatments, and timing",
+      "step3": "Harvest Success",
+      "step3Desc": "40% higher yields + healthy soil + premium prices",
+      "deepLearning": "Deep Learning",
+      "computerVision": "Computer vision for plant health",
+      "iotNetwork": "IoT Network",
+      "sensorIntegrations": "5000+ sensor integrations",
+      "realTimeData": "Real-Time Data",
+      "farmMonitoring": "24/7 farm monitoring",
+      "predictiveModels": "Predictive Models",
+      "forecasting": "30-day forecasting"
+    },
+    
+    "testimonials": {
+      "title": "Farmers Are Already Thriving",
+      "subtitle": "Real stories from real farmers who switched to natural, AI-powered farming",
+      "avgYield": "Avg. Yield Increase",
+      "acresRegenerated": "Acres Regenerated",
+      "rating": "Average Rating",
+      "cta": "Join thousands of farmers earning more while healing the planet"
+    },
+    
+    "revenue": {
+      "title": "We're Transparent by Design",
+      "subtitle": "Our Revenue Model Works For Farmers",
+      "info": "We don't exploit farmers. We partner with them. Here's exactly how we make money—and why it aligns with your success.",
+      "how": "How We Earn Revenue",
+      "consultation": "Premium Consultation",
+      "consultationDesc": "Global AgriScientist consultations",
+      "marketplace": "Marketplace Commission",
+      "marketplaceDesc": "Organic seeds, tools, IoT sensors",
+      "premium": "AI Premium Features",
+      "premiumDesc": "Advanced prediction models",
+      "aggregation": "Farm Aggregation",
+      "aggregationDesc": "Connect farms to bulk buyers",
+      "benefits": "Why This Works",
+      "benefitsDesc": "Each revenue stream directly benefits farmers through features, tools, consultants, and market access.",
+      "where": "Where Revenue Goes",
+      "description": "Every $100 from our platform:",
+      "farmerEarnings": "Farmer Earnings",
+      "agrismart": "AgriSmart Cut",
+      "platformCosts": "Platform Costs",
+      "noFees": "No Hidden Fees",
+      "noExploit": "No exploitation. Transparent pricing always.",
+      "growth": "Our Growth = Your Growth",
+      "growthDesc": "As farmers earn more, we invest more in features.",
+      "sustainable": "We're Sustainable",
+      "sustainableDesc": "Reinvesting profits into tech, consultants, and farmers.",
+      "why": "Why This Model Benefits You",
+      "aligned": "Aligned Incentives - We win only when farmers win. Your success is our success.",
+      "noMonopoly": "No Farm Monopoly - We're a partner, not a middleman. Farmers keep 75%+ of earnings.",
+      "continuous": "Continuous Investment - Revenue funds better AI, more experts, and new features for you."
+    },
+    
+    "cta": {
+      "title": "Join the Organic Revolution",
+      "subtitle": "Stop fighting nature. Start working with it. Let AI amplify your farming wisdom and heal the planet.",
+      "stats": ["50,000+ Farmers", "2.5M+ Acres Healed", "95% Yield Increase"],
+      "benefits": ["🤖 AI-Powered - Crop prediction & disease detection", "🌍 Global Network - Consult experts from 40+ countries", "💚 100% Transparent - You keep 75%+ of earnings"],
+      "perks": ["✓ Free for first 50 acres", "✓ No credit card required", "✓ Support in 15+ languages"],
+      "help": "Questions? We are here to help.",
+      "support": "View FAQ & Get Support →"
+    }
+  },
+  
+  "buttons": {
+    "startJourney": "Start Journey",
+    "learnAI": "Learn How AI Works",
+    "joinMovement": "Join Movement",
+    "getStarted": "Get Started Now",
+    "signUp": "Sign Up",
+    "tryNow": "Try Now",
+    "backHome": "Back to Home",
+    "backToHome": "Back to Home",
+    "joinNow": "Join Movement Now"
+  }
 }

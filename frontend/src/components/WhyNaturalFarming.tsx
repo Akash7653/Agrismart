@@ -53,7 +53,7 @@ export const WhyNaturalFarming: React.FC = () => {
   ];
 
   return (
-    <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
+    <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>

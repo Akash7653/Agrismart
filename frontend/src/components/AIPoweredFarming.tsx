@@ -41,7 +41,7 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
   ];
 
   return (
-    <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-emerald-900 to-gray-900 overflow-hidden">
+    <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-emerald-900 to-gray-900 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-1/4 w-96 h-96 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
