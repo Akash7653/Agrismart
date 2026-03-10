@@ -64,9 +64,9 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
-        <div className="min-h-screen flex flex-col justify-center items-center text-center pt-16 sm:pt-20 pb-16 sm:pb-20">
+        <div className="min-h-screen flex flex-col justify-center items-center text-center pt-24 sm:pt-28 pb-24 sm:pb-28 px-4">
           {/* Badge */}
-          <div className={`inline-flex items-center px-3 sm:px-4 py-2 mb-6 sm:mb-8 rounded-full backdrop-blur-sm border animate-fade-in-down text-xs sm:text-sm font-semibold shadow-lg ${
+          <div className={`inline-flex items-center px-4 sm:px-6 py-3 mb-8 sm:mb-12 rounded-full backdrop-blur-sm border animate-fade-in-down text-xs sm:text-sm font-semibold shadow-lg ${
             isDark 
               ? 'bg-blue-900/40 border-blue-700 text-blue-300' 
               : 'bg-emerald-100/80 border-emerald-200 text-emerald-700'
@@ -76,8 +76,8 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
           </div>
 
           {/* Main Headline */}
-          <div className="max-w-4xl space-y-3 sm:space-y-4 md:space-y-6 mb-6 sm:mb-8 md:mb-12 px-2 sm:px-0">
-            <h1 className={`leading-tight animate-fade-in-up text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`} style={{ animationDelay: '0.1s' }}>
+          <div className="max-w-4xl space-y-4 sm:space-y-6 md:space-y-8 mb-10 sm:mb-14 md:mb-16 px-2 sm:px-0">
+            <h1 className={`leading-tight animate-fade-in-up text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`} style={{ animationDelay: '0.1s' }}>
               <span className="block">AgriSmart AI</span>
               <span className={`bg-clip-text text-transparent bg-gradient-to-r ${
                 isDark 
@@ -134,7 +134,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
           </div>
 
           {/* Trust Indicators */}
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-8 max-w-full sm:max-w-2xl mx-auto px-2 sm:px-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:gap-8 max-w-full sm:max-w-2xl mx-auto px-2 sm:px-0 animate-fade-in mt-16 sm:mt-20" style={{ animationDelay: '0.4s' }}>
             <div className={`text-center p-3 sm:p-4 md:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
               isDark
                 ? 'bg-gray-800/50 backdrop-blur border border-gray-700 hover:bg-gray-800/80'
