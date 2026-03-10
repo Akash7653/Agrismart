@@ -271,6 +271,53 @@
       "cta": "These methods work. We combine them with AI for maximum impact."
     },
     
+    "aipowered": {
+      "badge": "Powered by AI",
+      "title": "Technology That Amplifies Nature",
+      "subtitle": "AI isn't meant to replace farming. It amplifies ancient wisdom.\nThree tools. Infinite possibilities.",
+      "feature1": {
+        "title": "Crop Prediction Engine",
+        "description": "AI analyzes soil data, weather patterns, and historical yields to recommend the perfect crops for your land.",
+        "benefits": ["97% accuracy", "Real-time updates", "Multi-crop recommendation"],
+        "features": ["Soil analysis", "Weather forecast", "Market demand", "Yield prediction"]
+      },
+      "feature2": {
+        "title": "Disease Detection AI",
+        "description": "Smartphone camera + ML model identifies plant diseases instantly. Stop problems before they spread.",
+        "benefits": ["Real-time detection", "94% accuracy", "Treatment guide"],
+        "features": ["Image recognition", "Treatment suggestions", "Organic solutions", "Prevention tips"]
+      },
+      "feature3": {
+        "title": "Smart Farm Monitor",
+        "description": "IoT sensors track soil moisture, nutrient levels, and crop health 24/7 with AI-powered alerts.",
+        "benefits": ["Real-time alerts", "Water optimization", "Yield increase 40%"],
+        "features": ["Soil sensors", "Weather data", "Health alerts", "Resource optimization"]
+      },
+      "howWorks": "How It Works Together",
+      "step1Title": "Assess Your Farm",
+      "step1Desc": "Smart sensors + AI analyze soil, weather, crops",
+      "step2Title": "Get Smart Recommendations",
+      "step2Desc": "AI suggests crops, treatments, and timing",
+      "step3Title": "Harvest Success",
+      "step3Desc": "40% higher yields + healthy soil + premium prices",
+      "tech1": {
+        "title": "Deep Learning",
+        "desc": "Computer vision for plant health"
+      },
+      "tech2": {
+        "title": "IoT Network",
+        "desc": "5000+ sensor integrations"
+      },
+      "tech3": {
+        "title": "Real-Time Data",
+        "desc": "24/7 farm monitoring"
+      },
+      "tech4": {
+        "title": "Predictive Models",
+        "desc": "30-day forecasting"
+      }
+    },
+    
     "revenue": {
       "title": "We're Transparent by Design",
       "subtitle": "Our Revenue Model Works For Farmers",

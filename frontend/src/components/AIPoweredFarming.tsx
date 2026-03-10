@@ -2,6 +2,7 @@ import React from 'react';
 import { Zap, Microscope, Monitor, ArrowRight } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
+import { useTranslation } from 'react-i18next';
 
 interface AIPoweredFarmingProps {
   onFeatureClick?: (feature: string) => void;
@@ -12,31 +13,59 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
 }) => {
   const { isDark } = useTheme();
   const { currentLanguage = 'en' } = useLanguage();
+  const { t } = useTranslation();
 
   const features = [
     {
-      title: 'Crop Prediction Engine',
-      description: 'AI analyzes soil data, weather patterns, and historical yields to recommend the perfect crops for your land.',
-      benefits: ['97% accuracy', 'Real-time updates', 'Multi-crop recommendation'],
+      title: t('aipowered.feature1.title', 'Crop Prediction Engine'),
+      description: t('aipowered.feature1.description', 'AI analyzes soil data, weather patterns, and historical yields to recommend the perfect crops for your land.'),
+      benefits: [
+        t('aipowered.feature1.benefits.0', '97% accuracy'),
+        t('aipowered.feature1.benefits.1', 'Real-time updates'),
+        t('aipowered.feature1.benefits.2', 'Multi-crop recommendation'),
+      ],
       icon: Zap,
       color: 'from-amber-400 to-orange-600',
-      features: ['Soil analysis', 'Weather forecast', 'Market demand', 'Yield prediction'],
+      features: [
+        t('aipowered.feature1.features.0', 'Soil analysis'),
+        t('aipowered.feature1.features.1', 'Weather forecast'),
+        t('aipowered.feature1.features.2', 'Market demand'),
+        t('aipowered.feature1.features.3', 'Yield prediction'),
+      ],
     },
     {
-      title: 'Disease Detection AI',
-      description: 'Smartphone camera + ML model identifies plant diseases instantly. Stop problems before they spread.',
-      benefits: ['Real-time detection', '94% accuracy', 'Treatment guide'],
+      title: t('aipowered.feature2.title', 'Disease Detection AI'),
+      description: t('aipowered.feature2.description', 'Smartphone camera + ML model identifies plant diseases instantly. Stop problems before they spread.'),
+      benefits: [
+        t('aipowered.feature2.benefits.0', 'Real-time detection'),
+        t('aipowered.feature2.benefits.1', '94% accuracy'),
+        t('aipowered.feature2.benefits.2', 'Treatment guide'),
+      ],
       icon: Microscope,
       color: 'from-green-400 to-emerald-600',
-      features: ['Image recognition', 'Treatment suggestions', 'Organic solutions', 'Prevention tips'],
+      features: [
+        t('aipowered.feature2.features.0', 'Image recognition'),
+        t('aipowered.feature2.features.1', 'Treatment suggestions'),
+        t('aipowered.feature2.features.2', 'Organic solutions'),
+        t('aipowered.feature2.features.3', 'Prevention tips'),
+      ],
     },
     {
-      title: 'Smart Farm Monitor',
-      description: 'IoT sensors track soil moisture, nutrient levels, and crop health 24/7 with AI-powered alerts.',
-      benefits: ['Real-time alerts', 'Water optimization', 'Yield increase 40%'],
+      title: t('aipowered.feature3.title', 'Smart Farm Monitor'),
+      description: t('aipowered.feature3.description', 'IoT sensors track soil moisture, nutrient levels, and crop health 24/7 with AI-powered alerts.'),
+      benefits: [
+        t('aipowered.feature3.benefits.0', 'Real-time alerts'),
+        t('aipowered.feature3.benefits.1', 'Water optimization'),
+        t('aipowered.feature3.benefits.2', 'Yield increase 40%'),
+      ],
       icon: Monitor,
       color: 'from-blue-400 to-cyan-600',
-      features: ['Soil sensors', 'Weather data', 'Health alerts', 'Resource optimization'],
+      features: [
+        t('aipowered.feature3.features.0', 'Soil sensors'),
+        t('aipowered.feature3.features.1', 'Weather data'),
+        t('aipowered.feature3.features.2', 'Health alerts'),
+        t('aipowered.feature3.features.3', 'Resource optimization'),
+      ],
     },
   ];
 
@@ -53,17 +82,15 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
         <div className="text-center mb-20">
           <div className="inline-flex items-center px-4 py-2 mb-6 bg-emerald-500/20 rounded-full border border-emerald-500/50 animate-fade-in-down">
             <Zap className="w-4 h-4 mr-2 text-emerald-400" />
-            <span className="text-emerald-300 text-sm font-semibold">Powered by AI</span>
+            <span className="text-emerald-300 text-sm font-semibold">{t('aipowered.badge', 'Powered by AI')}</span>
           </div>
 
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            Technology That <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-cyan-400 bg-clip-text text-transparent">Amplifies Nature</span>
+            {t('aipowered.title', 'Technology That')} <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-cyan-400 bg-clip-text text-transparent">Amplifies Nature</span>
           </h2>
 
           <p className="text-xl text-gray-300 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            AI isn't meant to replace farming. It amplifies ancient wisdom. 
-            <br />
-            Three tools. Infinite possibilities.
+            {t('aipowered.subtitle', "AI isn't meant to replace farming. It amplifies ancient wisdom.\nThree tools. Infinite possibilities.")}
           </p>
         </div>
 
@@ -134,7 +161,7 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
 
         {/* How It Works */}
         <div className="bg-gradient-to-r from-emerald-950 to-green-950 rounded-2xl p-12 border border-emerald-800/50">
-          <h3 className="text-3xl font-bold text-white mb-12 text-center">How It Works Together</h3>
+          <h3 className="text-3xl font-bold text-white mb-12 text-center">{t('aipowered.howWorks', 'How It Works Together')}</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
             {/* Step 1 */}
@@ -142,8 +169,8 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center text-2xl font-bold text-white">
                 1
               </div>
-              <p className="font-semibold text-white mb-2">Assess Your Farm</p>
-              <p className="text-sm text-gray-300">Smart sensors + AI analyze soil, weather, crops</p>
+              <p className="font-semibold text-white mb-2">{t('aipowered.step1Title', 'Assess Your Farm')}</p>
+              <p className="text-sm text-gray-300">{t('aipowered.step1Desc', 'Smart sensors + AI analyze soil, weather, crops')}</p>
             </div>
 
             <div className="hidden md:flex justify-center">
@@ -155,8 +182,8 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center text-2xl font-bold text-white">
                 2
               </div>
-              <p className="font-semibold text-white mb-2">Get Smart Recommendations</p>
-              <p className="text-sm text-gray-300">AI suggests crops, treatments, and timing</p>
+              <p className="font-semibold text-white mb-2">{t('aipowered.step2Title', 'Get Smart Recommendations')}</p>
+              <p className="text-sm text-gray-300">{t('aipowered.step2Desc', 'AI suggests crops, treatments, and timing')}</p>
             </div>
 
             <div className="hidden md:flex justify-center">
@@ -168,8 +195,8 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center text-2xl font-bold text-white">
                 3
               </div>
-              <p className="font-semibold text-white mb-2">Harvest Success</p>
-              <p className="text-sm text-gray-300">40% higher yields + healthy soil + premium prices</p>
+              <p className="font-semibold text-white mb-2">{t('aipowered.step3Title', 'Harvest Success')}</p>
+              <p className="text-sm text-gray-300">{t('aipowered.step3Desc', '40% higher yields + healthy soil + premium prices')}</p>
             </div>
           </div>
         </div>
@@ -177,20 +204,20 @@ export const AIPoweredFarming: React.FC<AIPoweredFarmingProps> = ({
         {/* Tech Stack */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div>
-            <p className="text-emerald-400 font-bold text-lg mb-2">Deep Learning</p>
-            <p className="text-gray-400 text-sm">Computer vision for plant health</p>
+            <p className="text-emerald-400 font-bold text-lg mb-2">{t('aipowered.tech1.title', 'Deep Learning')}</p>
+            <p className="text-gray-400 text-sm">{t('aipowered.tech1.desc', 'Computer vision for plant health')}</p>
           </div>
           <div>
-            <p className="text-emerald-400 font-bold text-lg mb-2">IoT Network</p>
-            <p className="text-gray-400 text-sm">5000+ sensor integrations</p>
+            <p className="text-emerald-400 font-bold text-lg mb-2">{t('aipowered.tech2.title', 'IoT Network')}</p>
+            <p className="text-gray-400 text-sm">{t('aipowered.tech2.desc', '5000+ sensor integrations')}</p>
           </div>
           <div>
-            <p className="text-emerald-400 font-bold text-lg mb-2">Real-Time Data</p>
-            <p className="text-gray-400 text-sm">24/7 farm monitoring</p>
+            <p className="text-emerald-400 font-bold text-lg mb-2">{t('aipowered.tech3.title', 'Real-Time Data')}</p>
+            <p className="text-gray-400 text-sm">{t('aipowered.tech3.desc', '24/7 farm monitoring')}</p>
           </div>
           <div>
-            <p className="text-emerald-400 font-bold text-lg mb-2">Predictive Models</p>
-            <p className="text-gray-400 text-sm">30-day forecasting</p>
+            <p className="text-emerald-400 font-bold text-lg mb-2">{t('aipowered.tech4.title', 'Predictive Models')}</p>
+            <p className="text-gray-400 text-sm">{t('aipowered.tech4.desc', '30-day forecasting')}</p>
           </div>
         </div>
       </div>
