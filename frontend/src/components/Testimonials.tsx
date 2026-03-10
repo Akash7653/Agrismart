@@ -1,44 +1,48 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from '../context/ThemeContext';
 
 export const Testimonials: React.FC = () => {
+  const { t } = useTranslation();
+  const { isDark } = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const testimonials = [
     {
-      name: 'Rajesh Patel',
-      location: 'Gujarat, India',
+      name: t('testimonials.farmer1.name', 'Rajesh Patel'),
+      location: t('testimonials.farmer1.location', 'Gujarat, India'),
       image: '👨‍🌾',
-      quote: 'AgriSmart helped me transition from chemical to organic farming. My yield increased 45% and my soil is regenerating.',
-      crop: 'Cotton & Mustard',
-      change: '+45% Yield',
+      quote: t('testimonials.farmer1.quote', 'AgriSmart helped me transition from chemical to organic farming. My yield increased 45% and my soil is regenerating.'),
+      crop: t('testimonials.farmer1.crop', 'Cotton & Mustard'),
+      change: t('testimonials.farmer1.change', '+45% Yield'),
       rating: 5,
     },
     {
-      name: 'Maria Santos',
-      location: 'Baja, Mexico',
+      name: t('testimonials.farmer2.name', 'Maria Santos'),
+      location: t('testimonials.farmer2.location', 'Baja, Mexico'),
       image: '👩‍🌾',
-      quote: 'The disease detection AI saved my entire corn crop from blight. Two weeks of early warning made all the difference.',
-      crop: 'Corn & Beans',
-      change: '+$8,000 saved',
+      quote: t('testimonials.farmer2.quote', 'The disease detection AI saved my entire corn crop from blight. Two weeks of early warning made all the difference.'),
+      crop: t('testimonials.farmer2.crop', 'Corn & Beans'),
+      change: t('testimonials.farmer2.change', '+$8,000 saved'),
       rating: 5,
     },
     {
-      name: 'James Kipchoge',
-      location: 'Nairobi, Kenya',
+      name: t('testimonials.farmer3.name', 'James Kipchoge'),
+      location: t('testimonials.farmer3.location', 'Nairobi, Kenya'),
       image: '👨‍🌾',
-      quote: 'Consulting with Dr. Omondi from AgriSmart changed everything. Now I grow drought-resistant crops profitably.',
-      crop: 'Maize & Sorghum',
-      change: '+60% Income',
+      quote: t('testimonials.farmer3.quote', 'Consulting with Dr. Omondi from AgriSmart changed everything. Now I grow drought-resistant crops profitably.'),
+      crop: t('testimonials.farmer3.crop', 'Maize & Sorghum'),
+      change: t('testimonials.farmer3.change', '+60% Income'),
       rating: 5,
     },
     {
-      name: 'Lin Chen',
-      location: 'Sichuan, China',
+      name: t('testimonials.farmer4.name', 'Lin Chen'),
+      location: t('testimonials.farmer4.location', 'Sichuan, China'),
       image: '👩‍🌾',
-      quote: 'The crop prediction engine knows my farm better than I do. Premium organic prices are now realistic.',
-      crop: 'Rice & Tea',
-      change: '2.5x Premium',
+      quote: t('testimonials.farmer4.quote', 'The crop prediction engine knows my farm better than I do. Premium organic prices are now realistic.'),
+      crop: t('testimonials.farmer4.crop', 'Rice & Tea'),
+      change: t('testimonials.farmer4.change', '2.5x Premium'),
       rating: 5,
     },
   ];
@@ -64,11 +68,15 @@ export const Testimonials: React.FC = () => {
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 animate-fade-in-down">
-            Farmers Are Already <span className="text-emerald-700">Thriving</span>
+          <h2 className={`text-5xl md:text-6xl font-bold mb-6 animate-fade-in-down ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`}>
+            {t('testimonials.title', 'Farmers Are Already')} <span className="text-emerald-700">Thriving</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            Real stories from real farmers who switched to natural, AI-powered farming
+          <p className={`text-xl max-w-2xl mx-auto animate-fade-in-up ${
+            isDark ? 'text-gray-300' : 'text-gray-600'
+          }`} style={{ animationDelay: '0.1s' }}>
+            {t('testimonials.subtitle', 'Real stories from real farmers who switched to natural, AI-powered farming')}
           </p>
         </div>
 
