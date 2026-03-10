@@ -76,8 +76,8 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
           </div>
 
           {/* Main Headline */}
-          <div className="max-w-4xl space-y-4 sm:space-y-6 md:space-y-8 mb-10 sm:mb-14 md:mb-16 px-2 sm:px-0">
-            <h1 className={`leading-tight animate-fade-in-up text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`} style={{ animationDelay: '0.1s' }}>
+          <div className="max-w-4xl space-y-3 sm:space-y-4 md:space-y-5 mb-6 sm:mb-8 md:mb-10 px-2 sm:px-0">
+            <h1 className={`leading-tight animate-fade-in-up text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`} style={{ animationDelay: '0.1s' }}>
               <span className="block">{t('landing.headline', 'AgriSmart AI')}</span>
               <span className={`bg-clip-text text-transparent bg-gradient-to-r ${
                 isDark 
@@ -87,6 +87,11 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
                 {t('landing.subheadline', 'Farming That Heals the Earth')}
               </span>
             </h1>
+            
+            {/* Description Subtitle */}
+            <p className={`text-sm sm:text-base md:text-lg leading-relaxed animate-fade-in-up ${isDark ? 'text-gray-300' : 'text-gray-700'}`} style={{ animationDelay: '0.2s' }}>
+              {t('landing.description', 'AI-powered organic farming for sustainable yields and healthy soil')}
+            </p>
           </div>
 
           {/* CTA Buttons */}
