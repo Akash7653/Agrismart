@@ -4,9 +4,10 @@ import { useTheme } from '../context/ThemeContext';
 
 interface LearnHowAIProps {
   onBack?: () => void;
+  onGetStarted?: () => void;
 }
 
-const LearnHowAI: React.FC<LearnHowAIProps> = ({ onBack }) => {
+const LearnHowAI: React.FC<LearnHowAIProps> = ({ onBack, onGetStarted }) => {
   const { isDark } = useTheme();
 
   const features = [
@@ -158,14 +159,14 @@ const LearnHowAI: React.FC<LearnHowAIProps> = ({ onBack }) => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => window.history.back()}
+              onClick={onBack}
               className="px-8 py-4 bg-white text-emerald-600 rounded-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
             >
               <ArrowRight className="w-5 h-5 rotate-180" />
               Back to Home
             </button>
             <button
-              onClick={() => window.location.href = '/auth'}
+              onClick={onGetStarted}
               className="px-8 py-4 bg-emerald-600 text-white rounded-lg font-bold hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105"
             >
               Get Started Now

@@ -81,9 +81,15 @@ function App() {
               />
               {/* Routing for landing page CTAs - use state-based navigation */}
               {activeSection === 'learn-how-ai' ? (
-                <LearnHowAI onBack={() => setActiveSection('dashboard')} />
+                <LearnHowAI 
+                  onBack={() => setActiveSection('dashboard')}
+                  onGetStarted={() => setShowAuthModal(true)}
+                />
               ) : activeSection === 'join-movement' ? (
-                <JoinTheMovement onBack={() => setActiveSection('dashboard')} />
+                <JoinTheMovement 
+                  onBack={() => setActiveSection('dashboard')}
+                  onGetStarted={() => setShowAuthModal(true)}
+                />
               ) : (
                 <LandingPage 
                   onGetStarted={() => setShowAuthModal(true)}
@@ -112,9 +118,15 @@ function App() {
                     {activeSection === 'history' && <UserHistory />}
                     {activeSection === 'analytics' && <ModernAnalytics />}
                     {activeSection === 'learn-how-ai' ? (
-                      <LearnHowAI onBack={() => setActiveSection('dashboard')} />
+                      <LearnHowAI 
+                        onBack={() => setActiveSection('dashboard')}
+                        onGetStarted={() => setShowAuthModal(true)}
+                      />
                     ) : activeSection === 'join-movement' ? (
-                      <JoinTheMovement onBack={() => setActiveSection('dashboard')} />
+                      <JoinTheMovement 
+                        onBack={() => setActiveSection('dashboard')}
+                        onGetStarted={() => setShowAuthModal(true)}
+                      />
                     ) : activeSection === 'dashboard' ? (
                       <>
                         <Hero currentUser={currentUser} onGetStarted={() => setShowAuthModal(true)} />
