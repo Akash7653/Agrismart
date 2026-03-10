@@ -1,5 +1,6 @@
 import React from 'react';
 import { Users, Leaf, Heart, Globe, Award, TrendingUp, ArrowRight, ChevronLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../context/ThemeContext';
 
 interface JoinTheMovementProps {
@@ -9,6 +10,7 @@ interface JoinTheMovementProps {
 
 const JoinTheMovement: React.FC<JoinTheMovementProps> = ({ onBack, onGetStarted }) => {
   const { isDark } = useTheme();
+  const { t } = useTranslation();
 
   const stats = [
     { label: 'Farmers Joined', value: '50,000+', icon: Users },
@@ -54,7 +56,7 @@ const JoinTheMovement: React.FC<JoinTheMovementProps> = ({ onBack, onGetStarted 
             }`}
           >
             <ChevronLeft className="w-5 h-5" />
-            <span className="font-semibold">Back to Home</span>
+            <span className="font-semibold">{t('buttons.backToHome', 'Back to Home')}</span>
           </button>
         </div>
       )}
@@ -64,10 +66,10 @@ const JoinTheMovement: React.FC<JoinTheMovementProps> = ({ onBack, onGetStarted 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
             <h1 className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Join the <span className={isDark ? 'text-emerald-400' : 'text-emerald-600'}>Organic Movement</span>
+              {t('joinMovement.title', 'Join the ')} <span className={isDark ? 'text-emerald-400' : 'text-emerald-600'}>{t('joinMovement.titleHighlight', 'Organic Movement')}</span>
             </h1>
             <p className={`text-xl text-center max-w-3xl mx-auto mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-              Be part of a global community transforming agriculture through sustainable, organic farming practices powered by AI technology.
+              {t('joinMovement.subtitle', 'Be part of a global community transforming agriculture through sustainable, organic farming practices powered by AI technology.')}
             </p>
           </div>
         </div>
@@ -77,7 +79,7 @@ const JoinTheMovement: React.FC<JoinTheMovementProps> = ({ onBack, onGetStarted 
       <div className={`py-16 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className={`text-3xl sm:text-4xl font-bold text-center mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Our Global Impact
+            {t('joinMovement.impactTitle', 'Our Global Impact')}
           </h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {stats.map((stat, index) => {

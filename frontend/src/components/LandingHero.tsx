@@ -78,13 +78,13 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
           {/* Main Headline */}
           <div className="max-w-4xl space-y-4 sm:space-y-6 md:space-y-8 mb-10 sm:mb-14 md:mb-16 px-2 sm:px-0">
             <h1 className={`leading-tight animate-fade-in-up text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`} style={{ animationDelay: '0.1s' }}>
-              <span className="block">AgriSmart AI</span>
+              <span className="block">{t('landing.headline', 'AgriSmart AI')}</span>
               <span className={`bg-clip-text text-transparent bg-gradient-to-r ${
                 isDark 
                   ? 'from-blue-400 via-cyan-400 to-emerald-400' 
                   : 'from-emerald-600 via-green-500 to-amber-600'
               }`}>
-                {t('farming_that_heals', 'Farming That Heals the Earth')}
+                {t('landing.subheadline', 'Farming That Heals the Earth')}
               </span>
             </h1>
           </div>
@@ -98,8 +98,8 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
             >
               <span className="relative z-10 flex items-center gap-2">
                 <Zap className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5" />
-                <span className="hidden sm:inline">Start Journey</span>
-                <span className="sm:hidden">Start</span>
+                <span className="hidden sm:inline">{t('buttons.startJourney', 'Start Journey')}</span>
+                <span className="sm:hidden">{t('buttons.startJourney', 'Start')}</span>
               </span>
               <ArrowRight className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 opacity-0 group-hover:opacity-100 transition-opacity relative z-10 hidden sm:block" />
               <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
@@ -114,8 +114,8 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
                   : 'bg-white text-emerald-700 border-emerald-200 hover:border-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20'
               }`}
             >
-              <span className="relative z-10 hidden sm:inline">Learn How AI Works</span>
-              <span className="relative z-10 sm:hidden">Learn AI</span>
+              <span className="relative z-10 hidden sm:inline">{t('buttons.learnAI', 'Learn How AI Works')}</span>
+              <span className="relative z-10 sm:hidden">{t('buttons.learnAI', 'Learn AI')}</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
 
@@ -125,8 +125,8 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
               className="group relative flex items-center justify-center gap-2 px-5 sm:px-6 md:px-8 py-3 sm:py-3 md:py-4 text-xs sm:text-sm md:text-lg font-bold text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-95 overflow-hidden bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 whitespace-nowrap min-h-[44px] sm:min-h-[48px] md:min-h-auto"
             >
               <span className="relative z-10 flex items-center gap-2">
-                <span className="hidden sm:inline">Join Movement</span>
-                <span className="sm:hidden">Join</span>
+                <span className="hidden sm:inline">{t('buttons.joinMovement', 'Join Movement')}</span>
+                <span className="sm:hidden">{t('buttons.joinMovement', 'Join')}</span>
               </span>
               <ArrowRight className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 opacity-0 group-hover:opacity-100 transition-opacity relative z-10 hidden sm:block" />
               <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
@@ -143,7 +143,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
               <p className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 bg-gradient-to-r ${
                 isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
               } bg-clip-text text-transparent`}>2.5M+</p>
-              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Acres Healed</p>
+              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{t('landing.acresHealed', 'Acres Healed')}</p>
             </div>
             <div className={`text-center p-3 sm:p-4 md:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
               isDark
@@ -153,7 +153,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
               <p className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 bg-gradient-to-r ${
                 isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
               } bg-clip-text text-transparent`}>50K+</p>
-              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Happy Farmers</p>
+              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{t('landing.happyFarmers', 'Happy Farmers')}</p>
             </div>
             <div className={`text-center p-3 sm:p-4 md:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
               isDark
@@ -163,7 +163,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
               <p className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 bg-gradient-to-r ${
                 isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
               } bg-clip-text text-transparent`}>99%+</p>
-              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Accuracy Rate</p>
+              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{t('landing.accuracyRate', 'Accuracy Rate')}</p>
             </div>
             <div className={`text-center p-3 sm:p-4 md:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
               isDark
@@ -173,7 +173,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
               <p className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 bg-gradient-to-r ${
                 isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
               } bg-clip-text text-transparent`}>24/7</p>
-              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>AI Support</p>
+              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{t('landing.aiSupport', 'AI Support')}</p>
             </div>
             <div className={`text-center p-3 sm:p-4 md:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
               isDark
@@ -183,7 +183,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
               <p className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 bg-gradient-to-r ${
                 isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
               } bg-clip-text text-transparent`}>50K+</p>
-              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Farmers Trust Us</p>
+              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{t('landing.farmersCount', 'Farmers Trust Us')}</p>
             </div>
             <div className={`text-center p-3 sm:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
               isDark
@@ -193,7 +193,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
               <p className={`text-2xl sm:text-3xl font-bold mb-2 bg-gradient-to-r ${
                 isDark ? 'from-blue-400 to-cyan-400' : 'from-emerald-600 to-green-600'
               } bg-clip-text text-transparent`}>40+</p>
-              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Countries</p>
+              <p className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{t('landing.countries', 'Countries')}</p>
             </div>
             <div className={`text-center p-3 sm:p-6 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-105 ${
               isDark

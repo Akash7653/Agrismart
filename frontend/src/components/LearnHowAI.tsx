@@ -1,5 +1,6 @@
 import React from 'react';
 import { Brain, Zap, TrendingUp, Shield, Users, BarChart3, ArrowRight, ChevronLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../context/ThemeContext';
 
 interface LearnHowAIProps {
@@ -9,6 +10,7 @@ interface LearnHowAIProps {
 
 const LearnHowAI: React.FC<LearnHowAIProps> = ({ onBack, onGetStarted }) => {
   const { isDark } = useTheme();
+  const { t } = useTranslation();
 
   const features = [
     {
@@ -58,7 +60,7 @@ const LearnHowAI: React.FC<LearnHowAIProps> = ({ onBack, onGetStarted }) => {
             }`}
           >
             <ChevronLeft className="w-5 h-5" />
-            <span className="font-semibold">Back to Home</span>
+            <span className="font-semibold">{t('buttons.backToHome', 'Back to Home')}</span>
           </button>
         </div>
       )}
@@ -68,10 +70,10 @@ const LearnHowAI: React.FC<LearnHowAIProps> = ({ onBack, onGetStarted }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
             <h1 className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              How <span className={isDark ? 'text-blue-400' : 'text-emerald-600'}>AgriSmart AI</span> Works
+              {t('learnAI.title', 'How ')} <span className={isDark ? 'text-blue-400' : 'text-emerald-600'}>AgriSmart AI</span> {t('learnAI.titleEnd', 'Works')}
             </h1>
             <p className={`text-xl text-center max-w-3xl mx-auto mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-              Discover the cutting-edge technology that powers smarter, more sustainable farming for millions of farmers worldwide.
+              {t('learnAI.subtitle', 'Discover the cutting-edge technology that powers smarter, more sustainable farming for millions of farmers worldwide.')}
             </p>
           </div>
         </div>
@@ -122,7 +124,7 @@ const LearnHowAI: React.FC<LearnHowAIProps> = ({ onBack, onGetStarted }) => {
       <div className={`py-16 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className={`text-3xl sm:text-4xl font-bold text-center mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Trusted by Farmers Worldwide
+            {t('learnAI.trustedTitle', 'Trusted by Farmers Worldwide')}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {stats.map((stat, index) => {
