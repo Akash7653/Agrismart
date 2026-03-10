@@ -219,6 +219,58 @@
       }
     },
     
+    "traditional": {
+      "title": "Ancient Wisdom for Modern Times",
+      "subtitle": "Organic farming isn't new. It's timeless. Proven across cultures for millennia.",
+      "method1": {
+        "region": "Ancient India",
+        "title": "Cow-Dung Farming",
+        "description": "Vedic techniques using cow manure for soil enrichment, nitrogen fixation, and natural pest control.",
+        "benefits": ["Soil regeneration", "Natural nitrogen", "Biodiversity boost", "Water retention"]
+      },
+      "method2": {
+        "region": "Indigenous Americas",
+        "title": "The Three Sisters",
+        "description": "Companion planting: corn, beans, and squash together. Maximizes yield while regenerating soil.",
+        "benefits": ["Pest control", "Nutrient cycling", "Increased yield", "Drought resilient"]
+      },
+      "method3": {
+        "region": "African Tradition",
+        "title": "Agroforestry",
+        "description": "Integrating trees with crops. Prevents erosion, fixes carbon, and provides diverse harvest.",
+        "benefits": ["Carbon sequester", "Erosion control", "Biodiversity", "Extra income"]
+      },
+      "comparison": {
+        "title": "Traditional vs Chemical Farming",
+        "subtitle": "Comprehensive impact comparison that tells the real story",
+        "traditional": "Traditional Farming",
+        "chemical": "Chemical Farming",
+        "aspectSoil": "Soil Quality",
+        "traditionalSoil": "Improves year by year",
+        "chemicalSoil": "Degrades rapidly",
+        "aspectWater": "Water Usage",
+        "traditionalWater": "Efficient retention",
+        "chemicalWater": "Heavy consumption",
+        "aspectHealth": "Worker Health",
+        "traditionalHealth": "Safe for farmers",
+        "chemicalHealth": "Toxic exposure",
+        "aspectFood": "Food Quality",
+        "traditionalFood": "Rich in nutrients",
+        "chemicalFood": "Depleted nutrients",
+        "aspectCost": "Cost",
+        "traditionalCost": "Low long-term",
+        "chemicalCost": "High seed & input costs",
+        "aspectClimate": "Climate Impact",
+        "traditionalClimate": "Carbon negative",
+        "chemicalClimate": "Carbon heavy",
+        "sustainableTitleLegend": "Sustainable & Beneficial",
+        "sustainableDescLegend": "Good for soil and farmers",
+        "harmfulTitleLegend": "Harmful & Unsustainable",
+        "harmfulDescLegend": "Destroys soil and health"
+      },
+      "cta": "These methods work. We combine them with AI for maximum impact."
+    },
+    
     "revenue": {
       "title": "We're Transparent by Design",
       "subtitle": "Our Revenue Model Works For Farmers",

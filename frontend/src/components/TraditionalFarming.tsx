@@ -2,45 +2,86 @@ import React from 'react';
 import { CheckCircle2, XCircle } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
+import { useTranslation } from 'react-i18next';
 
 export const TraditionalFarming: React.FC = () => {
   const { isDark } = useTheme();
   const { currentLanguage = 'en' } = useLanguage();
+  const { t } = useTranslation();
 
   const methods = [
     {
-      region: 'Ancient India',
-      title: 'Cow-Dung Farming',
-      description: 'Vedic techniques using cow manure for soil enrichment, nitrogen fixation, and natural pest control.',
-      benefits: ['Soil regeneration', 'Natural nitrogen', 'Biodiversity boost', 'Water retention'],
+      region: t('traditional.method1.region', 'Ancient India'),
+      title: t('traditional.method1.title', 'Cow-Dung Farming'),
+      description: t('traditional.method1.description', 'Vedic techniques using cow manure for soil enrichment, nitrogen fixation, and natural pest control.'),
+      benefits: [
+        t('traditional.method1.benefits.0', 'Soil regeneration'),
+        t('traditional.method1.benefits.1', 'Natural nitrogen'),
+        t('traditional.method1.benefits.2', 'Biodiversity boost'),
+        t('traditional.method1.benefits.3', 'Water retention'),
+      ],
       emoji: '🐄',
       color: 'from-amber-400 to-amber-600',
     },
     {
-      region: 'Indigenous Americas',
-      title: 'The Three Sisters',
-      description: 'Companion planting: corn, beans, and squash together. Maximizes yield while regenerating soil.',
-      benefits: ['Pest control', 'Nutrient cycling', 'Increased yield', 'Drought resilient'],
+      region: t('traditional.method2.region', 'Indigenous Americas'),
+      title: t('traditional.method2.title', 'The Three Sisters'),
+      description: t('traditional.method2.description', 'Companion planting: corn, beans, and squash together. Maximizes yield while regenerating soil.'),
+      benefits: [
+        t('traditional.method2.benefits.0', 'Pest control'),
+        t('traditional.method2.benefits.1', 'Nutrient cycling'),
+        t('traditional.method2.benefits.2', 'Increased yield'),
+        t('traditional.method2.benefits.3', 'Drought resilient'),
+      ],
       emoji: '🌽',
       color: 'from-green-400 to-emerald-600',
     },
     {
-      region: 'African Tradition',
-      title: 'Agroforestry',
-      description: 'Integrating trees with crops. Prevents erosion, fixes carbon, and provides diverse harvest.',
-      benefits: ['Carbon sequester', 'Erosion control', 'Biodiversity', 'Extra income'],
+      region: t('traditional.method3.region', 'African Tradition'),
+      title: t('traditional.method3.title', 'Agroforestry'),
+      description: t('traditional.method3.description', 'Integrating trees with crops. Prevents erosion, fixes carbon, and provides diverse harvest.'),
+      benefits: [
+        t('traditional.method3.benefits.0', 'Carbon sequester'),
+        t('traditional.method3.benefits.1', 'Erosion control'),
+        t('traditional.method3.benefits.2', 'Biodiversity'),
+        t('traditional.method3.benefits.3', 'Extra income'),
+      ],
       emoji: '🌳',
       color: 'from-green-600 to-emerald-700',
     },
   ];
 
   const comparison = [
-    { aspect: 'Soil Quality', traditional: 'Improves year by year', chemical: 'Degrades rapidly' },
-    { aspect: 'Water Usage', traditional: 'Efficient retention', chemical: 'Heavy consumption' },
-    { aspect: 'Worker Health', traditional: 'Safe for farmers', chemical: 'Toxic exposure' },
-    { aspect: 'Food Quality', traditional: 'Rich in nutrients', chemical: 'Depleted nutrients' },
-    { aspect: 'Cost', traditional: 'Low long-term', chemical: 'High seed & input costs' },
-    { aspect: 'Climate Impact', traditional: 'Carbon negative', chemical: 'Carbon heavy' },
+    {
+      aspect: t('traditional.comparison.aspectSoil', 'Soil Quality'),
+      traditional: t('traditional.comparison.traditionalSoil', 'Improves year by year'),
+      chemical: t('traditional.comparison.chemicalSoil', 'Degrades rapidly'),
+    },
+    {
+      aspect: t('traditional.comparison.aspectWater', 'Water Usage'),
+      traditional: t('traditional.comparison.traditionalWater', 'Efficient retention'),
+      chemical: t('traditional.comparison.chemicalWater', 'Heavy consumption'),
+    },
+    {
+      aspect: t('traditional.comparison.aspectHealth', 'Worker Health'),
+      traditional: t('traditional.comparison.traditionalHealth', 'Safe for farmers'),
+      chemical: t('traditional.comparison.chemicalHealth', 'Toxic exposure'),
+    },
+    {
+      aspect: t('traditional.comparison.aspectFood', 'Food Quality'),
+      traditional: t('traditional.comparison.traditionalFood', 'Rich in nutrients'),
+      chemical: t('traditional.comparison.chemicalFood', 'Depleted nutrients'),
+    },
+    {
+      aspect: t('traditional.comparison.aspectCost', 'Cost'),
+      traditional: t('traditional.comparison.traditionalCost', 'Low long-term'),
+      chemical: t('traditional.comparison.chemicalCost', 'High seed & input costs'),
+    },
+    {
+      aspect: t('traditional.comparison.aspectClimate', 'Climate Impact'),
+      traditional: t('traditional.comparison.traditionalClimate', 'Carbon negative'),
+      chemical: t('traditional.comparison.chemicalClimate', 'Carbon heavy'),
+    },
   ];
 
   return (
@@ -59,10 +100,10 @@ export const TraditionalFarming: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-20">
           <h2 className={`text-5xl md:text-6xl font-bold mb-6 animate-fade-in-down ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Ancient Wisdom for <span className={isDark ? 'text-emerald-400' : 'text-emerald-700'}>Modern Times</span>
+            {t('traditional.title', 'Ancient Wisdom for')} <span className={isDark ? 'text-emerald-400' : 'text-emerald-700'}>Modern Times</span>
           </h2>
           <p className={`text-xl max-w-2xl mx-auto animate-fade-in-up ${isDark ? 'text-gray-300' : 'text-gray-600'}`} style={{ animationDelay: '0.1s' }}>
-            Organic farming isn't new. It's timeless. Proven across cultures for millennia.
+            {t('traditional.subtitle', "Organic farming isn't new. It's timeless. Proven across cultures for millennia.")}
           </p>
         </div>
 
@@ -113,8 +154,8 @@ export const TraditionalFarming: React.FC = () => {
             : 'bg-white border-gray-100'
         }`}>
           <div className="bg-gradient-to-r from-emerald-700 via-green-600 to-emerald-600 p-12">
-            <h3 className="text-3xl font-bold text-white mb-3">Traditional vs Chemical Farming</h3>
-            <p className="text-green-100 text-lg">Comprehensive impact comparison that tells the real story</p>
+            <h3 className="text-3xl font-bold text-white mb-3">{t('traditional.comparison.title', 'Traditional vs Chemical Farming')}</h3>
+            <p className="text-green-100 text-lg">{t('traditional.comparison.subtitle', 'Comprehensive impact comparison that tells the real story')}</p>
           </div>
 
           <div className="overflow-x-auto">
@@ -187,8 +228,8 @@ export const TraditionalFarming: React.FC = () => {
                 <CheckCircle2 className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Sustainable & Beneficial</p>
-                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Good for soil and farmers</p>
+                <p className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('traditional.comparison.sustainableTitleLegend', 'Sustainable & Beneficial')}</p>
+                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t('traditional.comparison.sustainableDescLegend', 'Good for soil and farmers')}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -196,8 +237,8 @@ export const TraditionalFarming: React.FC = () => {
                 <XCircle className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Harmful & Unsustainable</p>
-                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Destroys soil and health</p>
+                <p className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('traditional.comparison.harmfulTitleLegend', 'Harmful & Unsustainable')}</p>
+                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t('traditional.comparison.harmfulDescLegend', 'Destroys soil and health')}</p>
               </div>
             </div>
           </div>
@@ -206,7 +247,7 @@ export const TraditionalFarming: React.FC = () => {
         {/* CTA */}
         <div className="text-center mt-20 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
           <p className={`text-xl mb-8 font-semibold ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-            These methods work. We combine them with AI for maximum impact.
+            {t('traditional.cta', 'These methods work. We combine them with AI for maximum impact.')}
           </p>
           <button className="px-8 py-4 bg-gradient-to-r from-emerald-600 to-green-600 text-white rounded-lg font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105 shadow-lg active:scale-95">
             Learn How AI Amplifies Organic Farming
