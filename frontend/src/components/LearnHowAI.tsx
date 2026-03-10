@@ -1,8 +1,12 @@
 import React from 'react';
-import { Brain, Zap, TrendingUp, Shield, Users, BarChart3, ArrowRight } from 'lucide-react';
+import { Brain, Zap, TrendingUp, Shield, Users, BarChart3, ArrowRight, ChevronLeft } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
-const LearnHowAI: React.FC = () => {
+interface LearnHowAIProps {
+  onBack?: () => void;
+}
+
+const LearnHowAI: React.FC<LearnHowAIProps> = ({ onBack }) => {
   const { isDark } = useTheme();
 
   const features = [
@@ -41,6 +45,23 @@ const LearnHowAI: React.FC = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-gray-950' : 'bg-gray-50'}`}>
+      {/* Back Button */}
+      {onBack && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4">
+          <button
+            onClick={onBack}
+            className={`group flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 hover:-translate-x-1 ${
+              isDark
+                ? 'text-blue-400 hover:bg-gray-900/50'
+                : 'text-emerald-700 hover:bg-emerald-50'
+            }`}
+          >
+            <ChevronLeft className="w-5 h-5" />
+            <span className="font-semibold">Back to Home</span>
+          </button>
+        </div>
+      )}
+      
       {/* Hero Section */}
       <div className={`relative overflow-hidden ${isDark ? 'bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900' : 'bg-gradient-to-br from-emerald-100 via-blue-100 to-purple-100'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">

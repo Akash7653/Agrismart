@@ -53,6 +53,7 @@ function App() {
     setShowSuccessToast(true);
     setIsLoginAction(true);
     setShowAuthModal(false);
+    setActiveSection('dashboard');
   };
 
   const handleSignOut = () => {
@@ -60,6 +61,7 @@ function App() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
     setShowAuthModal(false);
+    setActiveSection('dashboard');
   };
 
   const handleSectionNavigate = (section: string) => {
@@ -77,11 +79,11 @@ function App() {
                 onAuthClick={() => setShowAuthModal(true)}
                 onSignOut={handleSignOut}
               />
-              {/* Routing for landing page CTAs */}
-              {window.location.pathname === '/learn-how-ai' ? (
-                <LearnHowAI />
-              ) : window.location.pathname === '/join-the-movement' ? (
-                <JoinTheMovement />
+              {/* Routing for landing page CTAs - use state-based navigation */}
+              {activeSection === 'learn-how-ai' ? (
+                <LearnHowAI onBack={() => setActiveSection('dashboard')} />
+              ) : activeSection === 'join-movement' ? (
+                <JoinTheMovement onBack={() => setActiveSection('dashboard')} />
               ) : (
                 <LandingPage 
                   onGetStarted={() => setShowAuthModal(true)}
@@ -110,9 +112,9 @@ function App() {
                     {activeSection === 'history' && <UserHistory />}
                     {activeSection === 'analytics' && <ModernAnalytics />}
                     {activeSection === 'learn-how-ai' ? (
-                      <LearnHowAI />
+                      <LearnHowAI onBack={() => setActiveSection('dashboard')} />
                     ) : activeSection === 'join-movement' ? (
-                      <JoinTheMovement />
+                      <JoinTheMovement onBack={() => setActiveSection('dashboard')} />
                     ) : activeSection === 'dashboard' ? (
                       <>
                         <Hero currentUser={currentUser} onGetStarted={() => setShowAuthModal(true)} />
